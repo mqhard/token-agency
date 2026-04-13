@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تصفح التصنيفات | توكن</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <!-- Import map for Three.js -->
+    <script type="importmap">
+        {
+            "imports": {
+                "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+                "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+            }
+        }
+    </script>
+</head>
+<body>
+    <canvas id="webgl-canvas"></canvas>
+    <header class="navbar">
+        <div class="container nav-content">
+            <a class="logo" href="index.html">
+                <img src="logo.svg" alt="توكن شعار" class="logo-icon logo-image">
+                <span class="logo-text">توكن</span>
+            </a>
+            <nav class="nav-links">
+                <a href="about.html">من نحن</a>
+                <a href="index.html#services">الخدمات</a>
+                <a href="brand-design.html">صانع الهوية</a>
+                <a href="categories.html" style="color:var(--primary-lime);">التصنيفات</a>
+                <a href="index.html#contact">تواصل معنا</a>
+            </nav>
+            <div class="nav-actions">
+                <a href="en.html" class="lang-switch" title="English / انجليزي">EN</a>
+                <a href="order.html" class="btn btn-primary">احصل على تصميمك</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Category Hero -->
+        <section class="category-header">
+            <div class="container">
+                <h1>تصميم لكل ما تحتاجه</h1>
+                <p>مهما كانت احتياجات عملك، يمكننا ربطك بخبير إبداعي ليمنح نشاطك مظهراً احترافياً. الشعارات، المواقع، أغلفة الكتب، والتسويق المتكامل... تجدها هنا.</p>
+            </div>
+        </section>
+
+        <div class="container" style="padding-bottom: 100px;">
+            
+            <!-- Section: Logo & Branding -->
+            <section class="category-section">
+                <h2>الهوية وبناء العلامة</h2>
+                <div class="category-grid">
+                    <a href="brand-design.html" class="category-card">
+                        <h3><span style="font-size:1.8rem">✒️</span> تصميم الشعار</h3>
+                        <p>شعار استثنائي ومميز يرسخ في ذاكرة عملائك ومصمم خصيصاً لعلامتك التجارية.</p>
+                        <span class="price-tag">يبدأ من $299</span>
+                    </a>
+                    
+                    <a href="brand-design.html" class="category-card">
+                        <div class="save-tag">توفير $70</div>
+                        <h3><span style="font-size:1.8rem">📘</span> الشعار مع دليل العلامة</h3>
+                        <p>طور تصميم شعارك إلى علامة تجارية حقيقية تشمل الخطوط، الألوان ونمط الاستخدام المتكامل.</p>
+                        <span class="price-tag">يبدأ من $429</span>
+                    </a>
+
+                    <a href="brand-design.html" class="category-card">
+                        <div class="save-tag">توفير 25%+</div>
+                        <h3><span style="font-size:1.8rem">🚀</span> الباقة الانطلاقية</h3>
+                        <p>شعار، بزنس كارد، وتصاميم منصات التواصل لترك انطباع مذهل على الإنترنت وخارجه.</p>
+                        <span class="price-tag">يبدأ من $599</span>
+                    </a>
+
+                    <a href="brand-design.html" class="category-card">
+                        <h3><span style="font-size:1.8rem">👔</span> بطاقات العمل وأوراق المراسلات</h3>
+                        <p>تصميم بطاقة مميزة وأوراق خطابات تروج لعلامتك وتبعث رسالة احترافية.</p>
+                        <span class="price-tag">يبدأ من $169</span>
+                    </a>
+                </div>
+            </section>
+
+            <!-- Section: Web & App Design -->
+            <section class="category-section">
+                <h2>تصميم الويب والتطبيقات</h2>
+                <div class="category-grid">
+                    <a href="#" class="category-card">
+                        <h3><span style="font-size:1.8rem">💻</span> تصميم صفحات الويب</h3>
+                        <p>تصاميم مواقع تفاعلية وجذابة مصممة لزيادة معدل التحويل وبناء الثقة.</p>
+                        <span class="price-tag">يبدأ من $599</span>
+                    </a>
+                    
+                    <a href="#" class="category-card">
+                        <div class="save-tag">توفير للشركات</div>
+                        <h3><span style="font-size:1.8rem">🌐</span> الشعار مع الموقع المتكامل</h3>
+                        <p>شعار مخصص بالإضافة لموقع إلكتروني كامل يعمل بكفاءة مع إدراج المحتوى.</p>
+                        <span class="price-tag">يبدأ من $1,399</span>
+                    </a>
+
+                    <a href="#" class="category-card">
+                        <h3><span style="font-size:1.8rem">📱</span> تصميم واجهات التطبيقات (iOS & Android)</h3>
+                        <p>واجهة وتجربة مستخدم مدروسة لتطبيقك لتشجيع عمليات التحميل وإبقاء المستخدمين.</p>
+                        <span class="price-tag">يبدأ من $599</span>
+                    </a>
+
+                    <a href="#" class="category-card">
+                        <h3><span style="font-size:1.8rem">🛬</span> صفحات الهبوط (Landing Pages)</h3>
+                        <p>صفحة هبوط مصممة خصيصاً لجذب النقرات واستقطاب العملاء المحتملين.</p>
+                        <span class="price-tag">يبدأ من $349</span>
+                    </a>
+                </div>
+            </section>
+
+            <!-- Section: Marketing & Advertising -->
+            <section class="category-section">
+                <h2>التسويق والإعلانات</h2>
+                <div class="category-grid">
+                    <a href="marketing.html" class="category-card">
+                        <h3><span style="font-size:1.8rem">📢</span> تصاميم منصات التواصل الاجتماعي</h3>
+                        <p>خلفيات ومنشورات مصممة للتفاعل لزيادة المتابعين والإعجابات.</p>
+                        <span class="price-tag">يبدأ من $79</span>
+                    </a>
+                    
+                    <a href="marketing.html" class="category-card">
+                        <h3><span style="font-size:1.8rem">🎯</span> تصميم الإعلانات والبانرات (Banner Ads)</h3>
+                        <p>بانرات إعلانية لشبكة الويب صممت خصيصاً لدفع التحويلات وتخفيض تكلفة النقرة.</p>
+                        <span class="price-tag">يبدأ من $49</span>
+                    </a>
+
+                    <a href="marketing.html" class="category-card">
+                        <h3><span style="font-size:1.8rem">✉️</span> قالب البريد الإلكتروني (Email Newsletters)</h3>
+                        <p>قوالب مخصصة لحملات البريد الإلكتروني تضمن تفاعل القراء وتحفيزهم على الفتح.</p>
+                        <span class="price-tag">يبدأ من $249</span>
+                    </a>
+
+                    <a href="marketing.html" class="category-card">
+                        <h3><span style="font-size:1.8rem">📊</span> الإنفوجرافيك (Infographics)</h3>
+                        <p>تصميم إنفوجرافيك جذاب لشرح البيانات وإرسال المعلومات بشكل مبسط ومؤثر.</p>
+                        <span class="price-tag">يبدأ من $399</span>
+                    </a>
+                </div>
+            </section>
+
+            <!-- Section: Visual Production -->
+            <section class="category-section">
+                <h2>الإنتاج المرئي</h2>
+                <div class="category-grid">
+                    <a href="production.html" class="category-card">
+                        <h3><span style="font-size:1.8rem">🎞️</span> فيديوهات الموشن جرافيك</h3>
+                        <p>من توضيح الأفكار لترويج المنتجات، رسومات متحركة تدمج المتعة والوضوح.</p>
+                        <span class="price-tag">مخصص للشركات</span>
+                    </a>
+                    
+                    <a href="production.html" class="category-card">
+                        <h3><span style="font-size:1.8rem">🎬</span> الإنتاج السينمائي والمونتاج</h3>
+                        <p>إنتاج عالي الجودة للإعلانات والأفلام المؤسسية مع احترافية تامة بالتنفيذ.</p>
+                        <span class="price-tag">مخصص للشركات</span>
+                    </a>
+                </div>
+            </section>
+
+        </div>
+
+    </main>
+
+    <footer>
+        <div class="container footer-content" style="padding: 40px 0;">
+            <p>&copy; 2026 توكن للحلول الرقمية. جميع الحقوق محفوظة.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script type="module" src="antigravity.js"></script>
+</body>
+</html>

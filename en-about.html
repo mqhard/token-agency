@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us | TOKEN - The Success Protocol</title>
+    <meta name="description" content="TOKEN - The Success Protocol. Connecting entrepreneurs with creators to achieve exceptional results.">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', 'Cairo', sans-serif;
+        }
+
+        html, body {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+
+        body {
+            background: transparent;
+            color: var(--text-main);
+            position: relative;
+        }
+
+        #webgl-canvas {
+            position: fixed !important;
+            top: 0 !important;
+            left: 0 !important;
+            width: 100% !important;
+            height: 100% !important;
+            z-index: -1 !important;
+            pointer-events: none !important;
+            display: block !important;
+        }
+
+        /* About Page Specific Styles */
+        .about-hero {
+            padding: 80px 0 120px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .about-hero-logo-section {
+            margin-bottom: 40px;
+        }
+
+        .bilingual-title {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 30px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+
+        .bilingual-title .ar-text,
+        .bilingual-title .en-text {
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary-lime), var(--accent-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-logo-pulsing {
+            width: 200px;
+            height: 200px;
+            margin: 0 auto 30px;
+            animation: pulse-scale 3s ease-in-out infinite;
+            filter: drop-shadow(0 0 30px rgba(173, 255, 47, 0.6)) drop-shadow(0 0 60px rgba(0, 229, 255, 0.4));
+        }
+
+        .pulsing-logo {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: block;
+        }
+
+        @keyframes pulse-scale {
+            0%, 100% {
+                transform: scale(1);
+                filter: drop-shadow(0 0 30px rgba(173, 255, 47, 0.6)) drop-shadow(0 0 60px rgba(0, 229, 255, 0.4));
+            }
+            50% {
+                transform: scale(1.1);
+                filter: drop-shadow(0 0 50px rgba(173, 255, 47, 0.8)) drop-shadow(0 0 100px rgba(0, 229, 255, 0.6));
+            }
+        }
+
+        .about-hero .subtitle {
+            font-size: 1.3rem;
+            color: var(--text-muted);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .about-content {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 80px 20px;
+        }
+
+        .about-section {
+            margin-bottom: 80px;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .about-section h2 {
+            font-size: 2rem;
+            color: var(--primary-lime);
+            margin-bottom: 30px;
+            position: relative;
+            padding-bottom: 20px;
+        }
+
+        .about-section h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary-lime), var(--accent-cyan));
+            border-radius: 2px;
+        }
+
+        .about-section h3 {
+            font-size: 1.4rem;
+            color: var(--accent-cyan);
+            margin: 40px 0 20px 0;
+        }
+
+        .about-section p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--text-muted);
+            margin-bottom: 20px;
+        }
+
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .value-card {
+            background: rgba(22, 26, 43, 0.3);
+            border: 1px solid rgba(173, 255, 47, 0.2);
+            padding: 30px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .value-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary-lime), var(--accent-cyan), transparent);
+        }
+
+        .value-card:hover {
+            background: rgba(22, 26, 43, 0.6);
+            border-color: var(--primary-lime);
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(173, 255, 47, 0.15);
+        }
+
+        .value-card h4 {
+            font-size: 1.2rem;
+            color: var(--primary-lime);
+            margin-bottom: 15px;
+        }
+
+        .value-card p {
+            margin-bottom: 0;
+            font-size: 1rem;
+        }
+
+        .founder-quote {
+            background: linear-gradient(135deg, rgba(173, 255, 47, 0.05), rgba(0, 229, 255, 0.05));
+            border-left: 4px solid var(--primary-lime);
+            padding: 40px;
+            margin: 60px 0;
+            border-radius: 10px;
+            font-style: italic;
+            font-size: 1.2rem;
+            color: var(--text-main);
+            line-height: 1.8;
+            position: relative;
+        }
+
+        .founder-quote::before {
+            content: '"';
+            position: absolute;
+            top: -20px;
+            left: 30px;
+            font-size: 4rem;
+            color: var(--primary-lime);
+            opacity: 0.3;
+        }
+
+        .cta-section {
+            text-align: center;
+            padding: 80px 20px;
+            background: rgba(22, 26, 43, 0.2);
+            border-radius: 20px;
+            margin-top: 80px;
+        }
+
+        .cta-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        .cta-section .btn {
+            margin: 10px;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .divider {
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--primary-lime), transparent);
+            margin: 60px 0;
+        }
+
+        @media (max-width: 768px) {
+            .about-hero h1 {
+                font-size: 2rem;
+            }
+
+            .about-section h2 {
+                font-size: 1.5rem;
+            }
+
+            .values-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+    <!-- Import map for Three.js -->
+    <script type="importmap">
+        {
+            "imports": {
+                "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+                "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+            }
+        }
+    </script>
+</head>
+<body>
+    <canvas id="webgl-canvas"></canvas>
+    <header class="navbar">
+        <div class="container nav-content">
+            <a class="logo" href="en.html">
+                <img src="logo.svg" alt="TOKEN Logo" class="logo-icon logo-image">
+                <span class="logo-text">TOKEN</span>
+            </a>
+            <nav class="nav-links">
+                <a href="en.html#services">Services</a>
+                <a href="en-about.html" style="color: var(--primary-lime);">About Us</a>
+                <a href="community.html">Community</a>
+                <a href="en.html#contact">Contact</a>
+            </nav>
+            <div class="nav-actions">
+                <a href="about.html" class="lang-switch">AR</a>
+                <a href="order.html" class="btn btn-primary">Start Your Project</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="about-hero">
+            <div class="container">
+                <div class="about-hero-logo-section">
+                    <h2 class="bilingual-title">
+                        <span class="ar-text">توكن</span>
+                        <span class="en-text">TOKEN</span>
+                    </h2>
+                    <div class="hero-logo-pulsing">
+                        <img src="logo.svg" alt="TOKEN - Precision Digital Transformation" class="pulsing-logo">
+                    </div>
+                </div>
+                <p class="subtitle">Not just a service company, but an "operating system" for the future</p>
+            </div>
+        </section>
+
+        <!-- Main Content -->
+        <div class="container about-content">
+            <!-- Prologue -->
+            <div class="about-section">
+                <h2>The Prologue</h2>
+                <p>
+                    In a world where the digital economy accelerates, traditional methods of business management 
+                    and production are no longer sufficient. The gap between an entrepreneur's "vision" and a creator's 
+                    "execution" has always lacked a unified language—one that ensures value and saves time. 
+                    And from here, <strong>TOKEN</strong> was born.
+                </p>
+            </div>
+
+            <div class="divider"></div>
+
+            <!-- Identity -->
+            <div class="about-section">
+                <h2>Who Are We (Identity)</h2>
+                <p>
+                    We are the primary reference and fundamental connector in the Middle East (Riyadh) that bridges 
+                    ambitious entrepreneurs and creative innovators. We are not just an intermediary platform; 
+                    we are a <strong>"creative exchange"</strong> where solutions are traded as indispensable strategic assets.
+                </p>
+            </div>
+
+            <div class="divider"></div>
+
+            <!-- Vision -->
+            <div class="about-section">
+                <h2>Our Vision</h2>
+                <p>
+                    To become the <strong>"global currency"</strong> for professional transactions in marketing, 
+                    business solutions, and visual and audio production. We don't aim to provide a service; 
+                    we aim to increase the market value of every project that passes through the TOKEN protocol.
+                </p>
+            </div>
+
+            <div class="divider"></div>
+
+            <!-- Core Values -->
+            <div class="about-section">
+                <h2>Our Core Values</h2>
+                <div class="values-grid">
+                    <div class="value-card">
+                        <h4>🔐 Encrypted Transparency</h4>
+                        <p>
+                            In TOKEN, every request is a commitment, and every solution is a protected asset. 
+                            We believe in clarity that builds absolute trust.
+                        </p>
+                    </div>
+                    <div class="value-card">
+                        <h4>⚡ Creator Sovereignty</h4>
+                        <p>
+                            We don't employ freelancers; we empower creative "miners" to mint their skills 
+                            and transform them into competitive solutions that impose their quality.
+                        </p>
+                    </div>
+                    <div class="value-card">
+                        <h4>🎯 Acquisition Precision</h4>
+                        <p>
+                            We grant entrepreneurs the privilege of choosing from the best solutions available, 
+                            ensuring that every TOKEN they invest returns real growth.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <!-- Competitive Edge -->
+            <div class="about-section">
+                <h2>Why TOKEN (The Competitive Edge)</h2>
+                <p>
+                    Because we've combined <strong>competitive intelligence</strong> (which guarantees you the best results 
+                    from multiple options) with <strong>knowledge excellence</strong> (which understands your brand's dimensions 
+                    and grand aspirations).
+                </p>
+                <p>
+                    In TOKEN, we handle <strong>"results," not "raw text"</strong>.
+                </p>
+            </div>
+
+            <div class="divider"></div>
+
+            <!-- Founder's Message -->
+            <div class="about-section">
+                <h2>The Founder's Message</h2>
+                <div class="founder-quote">
+                    We designed TOKEN to be the radical solution to slowness and randomness in the business and production sector. 
+                    We wanted to create a place where everyone understands that a great idea deserves great execution, 
+                    and that true talent is the most valuable currency in our current era.
+                </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <!-- Call to Action -->
+            <div class="cta-section">
+                <h2>Join the New Economy</h2>
+                <p style="font-size: 1.2rem; margin-bottom: 40px;">
+                    Whether you're seeking exceptional solutions for your company or you have the skills to create those solutions..
+                </p>
+                <h3 style="color: var(--primary-lime); font-size: 1.8rem; margin-bottom: 30px;">
+                    Welcome to TOKEN. Where the era of value begins.
+                </h3>
+                <div>
+                    <a href="order.html" class="btn btn-primary" style="padding: 15px 40px; font-size: 1.1rem;">Start With Us Now</a>
+                    <a href="community.html" class="btn" style="padding: 15px 40px; font-size: 1.1rem; border: 1px solid var(--primary-lime); color: var(--primary-lime);">Join the Community</a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer style="background: rgba(15, 17, 26, 0.8); border-top: 1px solid rgba(173, 255, 47, 0.2); padding: 40px 0; margin-top: 100px; text-align: center;">
+        <div class="container">
+            <p style="color: var(--text-muted);">© 2024 TOKEN. All Rights Reserved.</p>
+            <p style="color: var(--text-muted); margin-top: 10px; font-size: 0.9rem;">The Success Protocol | Pioneers of Precision Digital Transformation</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script type="module" src="antigravity.js"></script>
+</body>
+</html>

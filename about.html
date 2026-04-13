@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>من نحن | توكن - بروتوكول النجاح</title>
+    <meta name="description" content="توكن - بروتوكول النجاح. نحن نربط بين رواد الأعمال والمبدعين لتحقيق النتائج الاستثنائية.">
+    <!-- Google Fonts for Arabic -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        html, body {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+
+        body {
+            background: transparent;
+            color: var(--text-main);
+            font-family: var(--font-family);
+            position: relative;
+        }
+
+        #webgl-canvas {
+            position: fixed !important;
+            top: 0 !important;
+            left: 0 !important;
+            width: 100% !important;
+            height: 100% !important;
+            z-index: -1 !important;
+            pointer-events: none !important;
+            display: block !important;
+        }
+
+        /* About Page Specific Styles */
+        .about-hero {
+            padding: 80px 0 120px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .about-hero-logo-section {
+            margin-bottom: 40px;
+        }
+
+        .bilingual-title {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 30px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+
+        .bilingual-title .ar-text,
+        .bilingual-title .en-text {
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary-lime), var(--accent-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-logo-pulsing {
+            width: 200px;
+            height: 200px;
+            margin: 0 auto 30px;
+            animation: pulse-scale 3s ease-in-out infinite;
+            filter: drop-shadow(0 0 30px rgba(173, 255, 47, 0.6)) drop-shadow(0 0 60px rgba(0, 229, 255, 0.4));
+        }
+
+        .pulsing-logo {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: block;
+        }
+
+        @keyframes pulse-scale {
+            0%, 100% {
+                transform: scale(1);
+                filter: drop-shadow(0 0 30px rgba(173, 255, 47, 0.6)) drop-shadow(0 0 60px rgba(0, 229, 255, 0.4));
+            }
+            50% {
+                transform: scale(1.1);
+                filter: drop-shadow(0 0 50px rgba(173, 255, 47, 0.8)) drop-shadow(0 0 100px rgba(0, 229, 255, 0.6));
+            }
+        }
+
+        .about-hero .subtitle {
+            font-size: 1.3rem;
+            color: var(--text-muted);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .about-content {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 80px 20px;
+        }
+
+        .about-section {
+            margin-bottom: 80px;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .about-section h2 {
+            font-size: 2rem;
+            color: var(--primary-lime);
+            margin-bottom: 30px;
+            position: relative;
+            padding-bottom: 20px;
+        }
+
+        .about-section h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary-lime), var(--accent-cyan));
+            border-radius: 2px;
+        }
+
+        .about-section h3 {
+            font-size: 1.4rem;
+            color: var(--accent-cyan);
+            margin: 40px 0 20px 0;
+        }
+
+        .about-section p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--text-muted);
+            margin-bottom: 20px;
+        }
+
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .value-card {
+            background: rgba(22, 26, 43, 0.3);
+            border: 1px solid rgba(173, 255, 47, 0.2);
+            padding: 30px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .value-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary-lime), var(--accent-cyan), transparent);
+        }
+
+        .value-card:hover {
+            background: rgba(22, 26, 43, 0.6);
+            border-color: var(--primary-lime);
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(173, 255, 47, 0.15);
+        }
+
+        .value-card h4 {
+            font-size: 1.2rem;
+            color: var(--primary-lime);
+            margin-bottom: 15px;
+        }
+
+        .value-card p {
+            margin-bottom: 0;
+            font-size: 1rem;
+        }
+
+        .founder-quote {
+            background: linear-gradient(135deg, rgba(173, 255, 47, 0.05), rgba(0, 229, 255, 0.05));
+            border-left: 4px solid var(--primary-lime);
+            padding: 40px;
+            margin: 60px 0;
+            border-radius: 10px;
+            font-style: italic;
+            font-size: 1.2rem;
+            color: var(--text-main);
+            line-height: 1.8;
+            position: relative;
+        }
+
+        .founder-quote::before {
+            content: '"';
+            position: absolute;
+            top: -20px;
+            right: 30px;
+            font-size: 4rem;
+            color: var(--primary-lime);
+            opacity: 0.3;
+        }
+
+        .cta-section {
+            text-align: center;
+            padding: 80px 20px;
+            background: rgba(22, 26, 43, 0.2);
+            border-radius: 20px;
+            margin-top: 80px;
+        }
+
+        .cta-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        .cta-section .btn {
+            margin: 10px;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .divider {
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--primary-lime), transparent);
+            margin: 60px 0;
+        }
+
+        @media (max-width: 768px) {
+            .about-hero h1 {
+                font-size: 2rem;
+            }
+
+            .about-section h2 {
+                font-size: 1.5rem;
+            }
+
+            .values-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+    <!-- Import map for Three.js -->
+    <script type="importmap">
+        {
+            "imports": {
+                "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+                "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+            }
+        }
+    </script>
+</head>
+<body>
+    <canvas id="webgl-canvas"></canvas>
+    <header class="navbar">
+        <div class="container nav-content">
+            <a class="logo" href="index.html">
+                <img src="logo.svg" alt="توكن شعار" class="logo-icon logo-image">
+                <span class="logo-text">توكن</span>
+            </a>
+            <nav class="nav-links">
+                <a href="index.html#services">الخدمات</a>
+                <a href="about.html" style="color: var(--primary-lime);">من نحن</a>
+                <a href="community.html">المجتمع</a>
+                <a href="index.html#contact">تواصل معنا</a>
+            </nav>
+            <div class="nav-actions">
+                <a href="en-about.html" class="lang-switch" title="English / انجليزي">EN</a>
+                <a href="order.html" class="btn btn-primary">ابدأ مشروعك</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="about-hero">
+            <div class="container">
+                <div class="about-hero-logo-section">
+                    <h2 class="bilingual-title">
+                        <span class="ar-text">توكن</span>
+                        <span class="en-text">TOKEN</span>
+                    </h2>
+                    <div class="hero-logo-pulsing">
+                        <img src="logo.svg" alt="توكن - رواد التحول الرقمي" class="pulsing-logo">
+                    </div>
+                </div>
+                <p class="subtitle">ليست مجرد شركة خدمات، بل "نظام تشغيل" للمستقبل</p>
+            </div>
+        </section>
+
+        <!-- Main Content -->
+        <div class="container about-content">
+            <!-- Prologue -->
+            <div class="about-section">
+                <h2>المقدمة (The Prologue)</h2>
+                <p>
+                    في عالم يتسارع فيه الاقتصاد الرقمي، لم تعد الأساليب التقليدية في إدارة الأعمال والإنتاج كافية. 
+                    الفجوة بين "رؤية" رائد الأعمال و"تنفيذ" المبدع كانت دائماً تفتقر إلى لغة موحدة، لغة تضمن 
+                    القيمة وتختصر الوقت. ومن هنا ولدت <strong>توكن</strong>.
+                </p>
+            </div>
+
+            <div class="divider"></div>
+
+            <!-- Identity -->
+            <div class="about-section">
+                <h2>من نحن (Identity)</h2>
+                <p>
+                    نحن المرجع الأول والمربط الأساسي في منطقة الشرق الأوسط (الرياض) الذي يربط بين عمالقة الطموح 
+                    (رواد الأعمال) ونخبة الصناع (المنفذين). نحن لسنا مجرد منصة وسيطة؛ نحن <strong>"بورصة إبداعية"</strong> 
+                    حيث تُتداول الحلول كأصول استراتيجية لا غنى عنها.
+                </p>
+            </div>
+
+            <div class="divider"></div>
+
+            <!-- Vision -->
+            <div class="about-section">
+                <h2>رؤيتنا (The Vision)</h2>
+                <p>
+                    أن نصبح <strong>"العملة العالمية"</strong> للتعاملات المهنية في مجالات التسويق، حلول الأعمال، 
+                    والإنتاج المرئي والمسموع. نحن لا نهدف لتقديم خدمة، بل لرفع القيمة السوقية لكل مشروع يمر عبر 
+                    بروتوكول توكن.
+                </p>
+            </div>
+
+            <div class="divider"></div>
+
+            <!-- Core Values -->
+            <div class="about-section">
+                <h2>أركان فلسفتنا (The Core Values)</h2>
+                <div class="values-grid">
+                    <div class="value-card">
+                        <h4>🔐 الشفافية المشفرة</h4>
+                        <p>
+                            في توكن، كل طلب هو التزام، وكل حل هو أصل محمي. نحن نؤمن بالوضوح 
+                            الذي يبني الثقة المطلقة.
+                        </p>
+                    </div>
+                    <div class="value-card">
+                        <h4>⚡ سيادة المبدع</h4>
+                        <p>
+                            نحن لا نوظف المستقلين؛ نحن نمكّن "المعدّنين" المبدعين من صكّ مهاراتهم وتحويلها 
+                            إلى حلول تنافسية تفرض جودتها.
+                        </p>
+                    </div>
+                    <div class="value-card">
+                        <h4>🎯 دقة الاستحواذ</h4>
+                        <p>
+                            نمنح رائد الأعمال رفاهية الاختيار من بين أفضل الحلول المطروحة، 
+                            لضمان أن كل توكن يستثمر فيه يعود عليه بنمو حقيقي.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <!-- Competitive Edge -->
+            <div class="about-section">
+                <h2>لماذا توكن (The Competitive Edge)</h2>
+                <p>
+                    لأننا دمجنا <strong>الذكاء التنافسي</strong> (الذي يضمن لك أفضل النتائج من بين خيارات متعددة) 
+                    مع <strong>الفخامة المعرفية</strong> (التي تدرك أبعاد علامتك التجارية وتطلعاتك الكبرى). 
+                </p>
+                <p>
+                    في توكن، نحن نعالج <strong>"النتائج"، لا "النصوص الخام"</strong>.
+                </p>
+            </div>
+
+            <div class="divider"></div>
+
+            <!-- Founder's Message -->
+            <div class="about-section">
+                <h2>كلمة المؤسس (The Foundation)</h2>
+                <div class="founder-quote">
+                    لقد صممنا توكن لتكون الحل الجذري للبطء والعشوائية في قطاع الأعمال والإنتاج. 
+                    أردنا بناء مكان يدرك فيه الجميع أن الفكرة العظيمة تستحق تنفيذاً أعظم، وأن الموهبة 
+                    الحقيقية هي العملة الأكثر قيمة في عصرنا الحالي.
+                </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <!-- Call to Action -->
+            <div class="cta-section">
+                <h2>انضم إلى الاقتصاد الجديد</h2>
+                <p style="font-size: 1.2rem; margin-bottom: 40px;">
+                    سواء كنت تسعى للاستحواذ على حلول استثنائية لشركتك، أو كنت تملك المهارة لصناعة تلك الحلول..
+                </p>
+                <h3 style="color: var(--primary-lime); font-size: 1.8rem; margin-bottom: 30px;">
+                    مرحباً بك في توكن. حيث يبدأ عصر القيمة.
+                </h3>
+                <div>
+                    <a href="order.html" class="btn btn-primary" style="padding: 15px 40px; font-size: 1.1rem;">ابدأ معنا الآن</a>
+                    <a href="community.html" class="btn" style="padding: 15px 40px; font-size: 1.1rem; border: 1px solid var(--primary-lime); color: var(--primary-lime);">انضم للمجتمع</a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer style="background: rgba(15, 17, 26, 0.8); border-top: 1px solid rgba(173, 255, 47, 0.2); padding: 40px 0; margin-top: 100px; text-align: center;">
+        <div class="container">
+            <p style="color: var(--text-muted);">© 2024 توكن - TOKEN. جميع الحقوق محفوظة.</p>
+            <p style="color: var(--text-muted); margin-top: 10px; font-size: 0.9rem;">بروتوكول النجاح | رواد التحول الرقمي الدقيق</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script type="module" src="antigravity.js"></script>
+</body>
+</html>

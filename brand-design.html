@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تصميم الهوية والبناء | توكن</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <!-- Import map for Three.js -->
+    <script type="importmap">
+        {
+            "imports": {
+                "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+                "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+            }
+        }
+    </script>
+</head>
+<body>
+    <canvas id="webgl-canvas"></canvas>
+    <header class="navbar">
+        <div class="container nav-content">
+            <a class="logo" href="index.html">
+                <img src="logo.svg" alt="توكن شعار" class="logo-icon logo-image">
+                <span class="logo-text">توكن</span>
+            </a>
+            <nav class="nav-links">
+                <a href="about.html">من نحن</a>
+                <a href="index.html#services">الخدمات</a>
+                <a href="community.html">المجتمع</a>
+                <a href="index.html#contact">تواصل معنا</a>
+            </nav>
+            <div class="nav-actions">
+                <a href="en.html" class="lang-switch" title="English / انجليزي">EN</a>
+                <a href="index.html#discover" class="btn btn-primary">اكتشف حلولنا</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section (Zoviz Inspired) -->
+        <section class="zoviz-hero">
+            <div class="container">
+                <h1>حزمة تصميم واحدة لتلبية جميع احتياجات علامتك التجارية</h1>
+                <p>صمم شعارك الخاص وابنِ هوية متكاملة في مكان واحد. من ملفات الفيكتور لوسائل التواصل وحتى أدلة العلامة التجارية الكاملة.</p>
+                <div style="margin-top: 30px; display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
+                    <a href="order.html" class="btn btn-primary" style="padding: 15px 40px; font-size: 1.1rem;">احصل على تصميمك الآن</a>
+                    <a href="categories.html" class="btn" style="border: 1px solid var(--primary-lime); color: var(--primary-lime); background: transparent; padding: 15px 40px; font-size: 1.1rem;">تصفح التصنيفات</a>
+                </div>
+                <div style="margin-top:20px; font-size:0.9rem; color:var(--text-muted);">
+                    مهما كانت احتياجات عملك، يمكننا ربطك بخبير إبداعي ليمنح نشاطك مظهراً احترافياً.
+                </div>
+            </div>
+        </section>
+
+        <!-- Toolkit Section (Zoviz Inspired) -->
+        <section class="toolkit-section">
+            <div class="container">
+                <div class="alux-section-title">
+                    <p>العلامة التجارية</p>
+                    <h2>حل العلامة التجارية المتكامل لديك</h2>
+                </div>
+                <div class="toolkit-grid">
+                    <div class="toolkit-item">
+                        <div class="toolkit-icon">✒️</div>
+                        <div class="toolkit-item-content">
+                            <h3>ملفات الشعار</h3>
+                            <p>رسوميات عالية الدقة (SVG، PNG، EPS) بجودة قابلة للطباعة وبخلفيات شفافة ومظلمة لتفي بكافة متطلبات التسويق.</p>
+                        </div>
+                    </div>
+                    <div class="toolkit-item">
+                        <div class="toolkit-icon">📱</div>
+                        <div class="toolkit-item-content">
+                            <h3>أغلفة وسائل التواصل</h3>
+                            <p>أغلفة معدة مسبقاً لمختلف الشبكات الاجتماعية لضمان التناسق البصري ومحاذاة الشعار.</p>
+                        </div>
+                    </div>
+                    <div class="toolkit-item">
+                        <div class="toolkit-icon">📄</div>
+                        <div class="toolkit-item-content">
+                            <h3>ورق المراسلات والترويسة</h3>
+                            <p>تصاميم احترافية للطباعة وأوراق المراسلة تعطي طابعاً رسمياً وقوياً لنشاطك.</p>
+                        </div>
+                    </div>
+                    <div class="toolkit-item">
+                        <div class="toolkit-item-content" style="margin-right:90px;">
+                            <h3 style="color:var(--primary-lime);">وأكثر من ذلك بكثير المدمج في باقة توكن ←</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Industry Flow (Zoviz Inspired) -->
+        <section class="toolkit-section" style="border-top:none; text-align:center;">
+            <div class="container">
+                <h2>تصاميم الشعارات التي تتناسب مع صناعتك</h2>
+                <div class="industry-grid">
+                    <a href="#" class="industry-card">الأطعمة 🍔</a>
+                    <a href="#" class="industry-card">العقارات 🏢</a>
+                    <a href="#" class="industry-card">التقنية 💻</a>
+                    <a href="#" class="industry-card">الرياضة ⚽</a>
+                    <a href="#" class="industry-card">الجمال 💅</a>
+                    <a href="#" class="industry-card">الموضة 👗</a>
+                    <a href="#" class="industry-card">التجارة الإلكترونية 🛒</a>
+                    <a href="#" class="industry-card">الطب وصحة 🏥</a>
+                </div>
+                <a href="#" class="btn" style="margin-top:40px; border:1px solid rgba(255,255,255,0.2);">عرض كافة الصناعات</a>
+            </div>
+        </section>
+
+        <!-- Testimonial Section (Zoviz Inspired) -->
+        <section class="testimonials">
+            <div class="container">
+                <div class="alux-section-title">
+                    <h2>نجاح علامتك التجارية، مضمون</h2>
+                    <p>اكتشف ما يقوله عملاؤنا عنا</p>
+                </div>
+                <div class="testimonial-grid">
+                    <div class="testimonial-card">
+                        <span class="testimonial-quote">"</span>
+                        <p style="color:var(--text-main); line-height:1.8;">في بحر من وكالات التصميم، تتألق توكن حقاً. إنهم لا يقدمون مجرد شعار، بل نظاماً متكاملاً وحلولاً تمنح النشاط هوية موثوقة. خيار سريع ومذهل حقاً!</p>
+                        <div style="margin-top:30px; font-weight:700; color:var(--primary-lime);">- عبد الله م.</div>
+                    </div>
+                    <div class="testimonial-card">
+                        <span class="testimonial-quote">"</span>
+                        <p style="color:var(--text-main); line-height:1.8;">لم أكن بحاجة للانتظار لأسابيع للحصول على المخرجات. التوجيه الذي حصلت عليه منهم لتأسيس هوية الاستوديو الخاص بي كان استثنائياً وسريعاً.</p>
+                        <div style="margin-top:30px; font-weight:700; color:var(--primary-lime);">- سارة ف.</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section (Zoviz Inspired) -->
+        <section class="faq-section">
+            <div class="container">
+                <div class="alux-section-title">
+                    <h2>الأسئلة الشائعة</h2>
+                </div>
+                <div class="faq-container">
+                    <details class="faq-item">
+                        <summary>ما الذي يتضمنه الدليل المتكامل للعلامة التجارية؟</summary>
+                        <div class="faq-content">
+                            يتضمن الدليل الأساسي لوحة الألوان (الأكواد الأساسية)، الطباعة (الخطوط المستخدمة)، أشكال الشعار وتفرعاته المعتمدة، أمثلة للاستخدام الصحيح والخاطئ للشعار، ومراجع مرئية أخرى تضمن ثبات الهوية وقت التنفيذ.
+                        </div>
+                    </details>
+                    <details class="faq-item">
+                        <summary>كيف تختلف وكالة توكن عن مولدات الشعارات الجاهزة؟</summary>
+                        <div class="faq-content">
+                            نحن ندمج الحلول الذكية مع العقول البشرية الإبداعية. كل هوية تخضع للدراسة الاستراتيجية وليس مجرد إنشاء رمزي، مما يعني أنك تمتلك الهوية بالكامل بدون الخوف من التشابه الشائع الاستخدام.
+                        </div>
+                    </details>
+                    <details class="faq-item">
+                        <summary>هل أمتلك كامل الحقوق لشعاري بعد الاستلام؟</summary>
+                        <div class="faq-content">
+                            نعم، بناء الهوية الخاص بك يصبح ملكاً لك بالكامل فور استلامه وحصولك على المخرجات النهائية. نحن ننقل كافة حقوق الطبع والاستخدام التجاري إليك دون قيد أو شرط.
+                        </div>
+                    </details>
+                </div>
+            </div>
+        </section>
+        
+    </main>
+
+    <footer>
+        <div class="container footer-content" style="padding: 40px 0;">
+            <p>&copy; 2026 توكن للحلول الرقمية. جميع الحقوق محفوظة.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script type="module" src="antigravity.js"></script>
+</body>
+</html>

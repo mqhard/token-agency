@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>التسويق والإبداع | توكن</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <!-- Import map for Three.js -->
+    <script type="importmap">
+        {
+            "imports": {
+                "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+                "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+            }
+        }
+    </script>
+</head>
+<body>
+    <canvas id="webgl-canvas"></canvas>
+    <header class="navbar">
+        <div class="container nav-content">
+            <a class="logo" href="index.html">
+                <img src="logo.svg" alt="توكن شعار" class="logo-icon logo-image">
+                <span class="logo-text">توكن</span>
+            </a>
+            <nav class="nav-links">
+                <a href="about.html">من نحن</a>
+                <a href="index.html#services">الخدمات</a>
+                <a href="community.html">المجتمع</a>
+                <a href="index.html#contact">تواصل معنا</a>
+            </nav>
+            <div class="nav-actions">
+                <a href="en.html" class="lang-switch" title="English / انجليزي">EN</a>
+                <a href="#contact" class="btn btn-primary">ابدأ مشروعك</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Custom Hero Section (Duality Inspired) -->
+        <section class="duality-hero">
+            <div class="container">
+                <h1>نحن نمزج الإبداع والتكنولوجيا لنصنع علامات تجارية تحرك الأسواق.</h1>
+                <p>من التصاميم الجريئة إلى استراتيجيات التسويق الذكية، نجمع بين الفن والبرمجة لنخلق حلولاً تحدث تأثيراً كبيراً وتدفع عوائدك للنمو.</p>
+                <div class="hero-graphic" style="margin-top: 50px;">
+                    <div class="logo-wrapper" style="width:150px; height:150px;">
+                        <svg class="new-token-logo" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                            <defs>
+                                <linearGradient id="token-grad-hero" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" stop-color="var(--primary-lime)"/>
+                                    <stop offset="100%" stop-color="var(--accent-cyan)"/>
+                                </linearGradient>
+                            </defs>
+                            <g fill="url(#token-grad-hero)" stroke="url(#token-grad-hero)">
+                                <circle cx="50" cy="50" r="46" fill="none" stroke-width="4"/>
+                                <path d="M 50,50 Q 40,35 22,32 Q 40,20 50,8 Q 60,20 78,32 Q 60,35 50,50 Z" stroke="none"/>
+                                <path d="M 50,50 Q 65,40 68,22 Q 80,40 92,50 Q 80,60 68,78 Q 65,60 50,50 Z" stroke="none"/>
+                                <path d="M 50,50 Q 60,65 78,68 Q 60,80 50,92 Q 40,80 22,68 Q 40,65 50,50 Z" stroke="none"/>
+                                <path d="M 50,50 Q 35,60 32,78 Q 20,60 8,50 Q 20,40 32,22 Q 35,40 50,50 Z" stroke="none"/>
+                            </g>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Services Section (Duality Inspired) -->
+        <section class="container" style="padding: 100px 0;">
+            <span class="duality-section-subtitle">الخدمات التي نقدمها</span>
+            <h2 class="duality-section-title">من المواقع العالية التحويل واستراتيجيات السيو الذكية<br>إلى الإعلانات الفتاكة.</h2>
+            
+            <div class="duality-services-grid">
+                <div class="duality-service-card">
+                    <h3>البرمجة والتطوير</h3>
+                    <p>نبني مواقع وتطبيقات سريعة الاستجابة، مهيأة لمحركات البحث، وتضمن رفع معدلات التحويل وتنمية أعمالك عبر تقنيات متطورة.</p>
+                </div>
+                <div class="duality-service-card">
+                    <h3>التصميم والهوية</h3>
+                    <p>نصنع هويات علامات تجارية جريئة لا تُنسى، تلفت الانتباه من النظرة الأولى وتبني ثقة مستدامة مع عملائك المحتملين.</p>
+                </div>
+                <div class="duality-service-card">
+                    <h3>التسويق والاستراتيجية</h3>
+                    <p>نساعد الشركات على النمو المتسارع عبر تسويق استراتيجي متكامل، إعلانات مدفوعة ذكية، وحملات مبنية بالكامل على البيانات الدقيقة.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- The Vibes from our Clients (Duality Inspired) -->
+        <section class="duality-vibes">
+            <div class="container">
+                <span class="duality-section-subtitle">أجواء عملائنا</span>
+                <h2 class="duality-section-title">ماذا يقولون عند العمل معنا؟</h2>
+                
+                <div class="vibes-slider">
+                    <div class="vibes-card">
+                        <blockquote>"العمل مع توكن كان تجربة استثنائية. الفهم العميق لجمهورنا المستهدف واستراتيجيات النمو التي نفذوها أسفرت عن تضاعف المبيعات، شيء لا يصدق حقاً."</blockquote>
+                        <span class="vibes-author">— مازن، فريق المبيعات</span>
+                    </div>
+                    <div class="vibes-card">
+                        <blockquote>"منصة التجارة الإلكترونية التي صمموها لنا فاقت كل التوقعات. من التصور المبدئي وحتى الإطلاق، حولوا أعمالنا لآلة مبيعات تعمل على مدار الساعة."</blockquote>
+                        <span class="vibes-author">— فريق متجر الأناقة</span>
+                    </div>
+                    <div class="vibes-card">
+                        <blockquote>"مزيج مثالي بين الإبداع والذكاء البرمجي. الهوية البصرية تبدو أصيلة جداً وواجهة المستخدم بديهية بشكل مريح."</blockquote>
+                        <span class="vibes-author">— نور، إدارة التسويق</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Top Secret Portfolio (Duality Inspired) -->
+        <section class="duality-portfolio-secret">
+            <div class="container">
+                <div class="secret-box">
+                    <span class="duality-section-subtitle" style="color:var(--text-main);">سري جداً: المحتوى مقفل</span>
+                    <h2>تريد رؤية التفاصيل العميقة لنجاحاتنا؟</h2>
+                    <p style="color:var(--text-muted); margin-bottom: 30px; font-size:1.1rem; line-height:1.7;">هذا القسم مصنف بأنه عالي السرية. ولكن... نحن نحب فضولك. اضغط على الزر وسنسمح لك بالدخول لرؤية الأعمال الرائعة التي حجبناها عن المنافسين.</p>
+                    <a href="#" class="btn btn-primary" onclick="alert('تم فك التشفير! سيتم توجيهك لمعرض الأعمال قريباً.')">فك التشفير الآن 🔓</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section id="contact" class="duality-cta">
+            <div class="container">
+                <h2 style="font-size:3rem; margin-bottom:20px; max-width:800px; margin:0 auto 20px;">سواء كنت شركة ناشئة تبحث عن فرصة ذهبية، أو مؤسسة تسعى للهيمنة.</h2>
+                <p style="font-size:1.3rem; color:var(--text-muted); max-width:600px; margin:0 auto 40px;">نحن هنا لتحويل أفكارك إلى نقرات، نقرات إلى أرقام، وأرقام إلى أرباح. هل أنت جاهز لرفع مستوى لعبتك مع فريق يعرف تماماً ما يفعله؟</p>
+                <a href="mailto:contact@token.agency" class="btn btn-primary" style="font-size:1.2rem; padding: 15px 40px;">لنبدأ العمل الآن</a>
+            </div>
+        </section>
+        
+    </main>
+
+    <footer>
+        <div class="container footer-content" style="padding: 40px 0;">
+            <p>&copy; 2026 توكن للحلول الرقمية. جميع الحقوق محفوظة.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script type="module" src="antigravity.js"></script>
+</body>
+</html>

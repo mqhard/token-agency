@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ابدأ مشروعك الإبداعي | توكن</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <!-- Import map for Three.js -->
+    <script type="importmap">
+        {
+            "imports": {
+                "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+                "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <canvas id="webgl-canvas"></canvas>
+    <header class="navbar">
+        <div class="container nav-content">
+            <a class="logo" href="index.html">
+                <img src="logo.svg" alt="توكن شعار" class="logo-icon logo-image">
+                <span class="logo-text">توكن</span>
+            </a>
+            <nav class="nav-links">
+                <a href="about.html">من نحن</a>
+                <a href="categories.html">التصنيفات</a>
+                <a href="index.html#contact">تواصل معنا</a>
+            </nav>
+            <div class="nav-actions">
+                <a href="en.html" class="lang-switch">EN</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <div class="order-container">
+                <!-- Stepper -->
+                <div class="order-stepper">
+                    <div class="step-indicator active" id="step1-indicator">
+                        <div class="step-number">1</div>
+                        <span>النوع</span>
+                    </div>
+                    <div class="step-indicator" id="step2-indicator">
+                        <div class="step-number">2</div>
+                        <span>الأسلوب</span>
+                    </div>
+                    <div class="step-indicator" id="step3-indicator">
+                        <div class="step-number">3</div>
+                        <span>التفاصيل</span>
+                    </div>
+                    <div class="step-indicator" id="step4-indicator">
+                        <div class="step-number">4</div>
+                        <span>التواصل</span>
+                    </div>
+                </div>
+
+                <form id="briefForm">
+                    <!-- Step 1: Category Selection -->
+                    <div class="brief-step active" id="step1">
+                        <h2 style="text-align: center; margin-bottom: 30px;">ما هو نوع الحل الإبداعي الذي تحتاجه؟</h2>
+                        <div class="order-category-grid">
+                            <div class="order-category-card" onclick="selectCategory('logo', 'تصميم الهوية والشعار')">
+                                <i>✒️</i>
+                                <h3>تصميم الشعار</h3>
+                            </div>
+                            <div class="order-category-card" onclick="selectCategory('web', 'تصميم وتطوير المواقع')">
+                                <i>💻</i>
+                                <h3>تصميم الويب</h3>
+                            </div>
+                            <div class="order-category-card" onclick="selectCategory('marketing', 'التسويق والإبداع')">
+                                <i>📢</i>
+                                <h3>التسويق الرقمي</h3>
+                            </div>
+                            <div class="order-category-card" onclick="selectCategory('production', 'الإنتاج الإعلامي')">
+                                <i>🎞️</i>
+                                <h3>الإنتاج المرئي</h3>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Step 2: Style Selector -->
+                    <div class="brief-step" id="step2">
+                        <h2 style="text-align: center; margin-bottom: 30px;">حدد التوجه الإبداعي المفضل لديك</h2>
+                        <div class="style-selector-group">
+                            <div class="style-label">
+                                <span>كلاسيكي</span>
+                                <span>عصري</span>
+                            </div>
+                            <input type="range" min="1" max="100" value="50" class="style-slider"
+                                id="style-classic-modern">
+                        </div>
+                        <div class="style-selector-group">
+                            <div class="style-label">
+                                <span>بسيط (Minimal)</span>
+                                <span>جريء وصاخب</span>
+                            </div>
+                            <input type="range" min="1" max="100" value="50" class="style-slider"
+                                id="style-simple-bold">
+                        </div>
+                        <div class="style-selector-group">
+                            <div class="style-label">
+                                <span>أنيق وفخم</span>
+                                <span>عملي وسهل</span>
+                            </div>
+                            <input type="range" min="1" max="100" value="50" class="style-slider"
+                                id="style-elegant-practical">
+                        </div>
+                    </div>
+
+                    <!-- Step 3: Project Details -->
+                    <div class="brief-step" id="step3">
+                        <h2 style="text-align: center; margin-bottom: 30px;">حدثنا أكثر عن طموحات مشروعك</h2>
+                        <div class="form-group">
+                            <label>اسم المشروع / العلامة التجارية</label>
+                            <input type="text" id="projectName" placeholder="مثال: متجر توكن الإلكتروني" required>
+                        </div>
+                        <div class="form-group">
+                            <label>المجال (Industry)</label>
+                            <input type="text" id="industry" placeholder="مثال: التقنية، العقارات، الأغذية">
+                        </div>
+                        <div class="form-group">
+                            <label>اشرح رؤيتك لهذا العمل باختصار</label>
+                            <textarea id="vision" rows="4"
+                                placeholder="ما هي الرسالة التي تريد إيصالها من خلال هذا التصميم؟"></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Step 4: Contact & Submission -->
+                    <div class="brief-step" id="step4">
+                        <h2 style="text-align: center; margin-bottom: 30px;">خطوتنا الأخيرة، كيف نتواصل معك؟</h2>
+                        <div class="form-group">
+                            <label>الاسم الكامل</label>
+                            <input type="text" id="clientName" required>
+                        </div>
+                        <div class="form-group">
+                            <label>البريد الإلكتروني للإرسال</label>
+                            <input type="email" id="clientEmail" required>
+                        </div>
+                        <div class="form-group">
+                            <label>الميزانية المتوقعة للاستثمار</label>
+                            <select id="budget">
+                                <option value="starter">باقة البداية (من $299)</option>
+                                <option value="pro">باقة المحترفين (من $999)</option>
+                                <option value="enterprise">باقة الشركات (حسب الطلب)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Navigation Buttons -->
+                    <div class="order-navigation">
+                        <button type="button" class="btn" id="prevBtn" onclick="changeStep(-1)"
+                            style="visibility: hidden;">السابق</button>
+                        <button type="button" class="btn btn-primary" id="nextBtn"
+                            onclick="changeStep(1)">التالي</button>
+                    </div>
+                </form>
+
+                <!-- Live Summary -->
+                <div class="order-summary-sidebar" id="summaryBox">
+                    <h3 style="font-size: 1rem; margin-bottom: 15px; color: var(--primary-lime);">ملخص الطلب</h3>
+                    <div class="summary-item">
+                        <span>الخدمة:</span>
+                        <span id="summary-category">لم يتم التحديد</span>
+                    </div>
+                    <div class="summary-item">
+                        <span>المشروع:</span>
+                        <span id="summary-name">-</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        let currentStep = 1;
+        let selectedCategory = "";
+
+        function selectCategory(id, name) {
+            selectedCategory = name;
+            document.getElementById('summary-category').innerText = name;
+
+            // Highlight selected
+            document.querySelectorAll('.order-category-card').forEach(card => card.classList.remove('selected'));
+            event.currentTarget.classList.add('selected');
+
+            // Auto advance
+            setTimeout(() => changeStep(1), 300);
+        }
+
+        function changeStep(n) {
+            // Validation before moving forward
+            if (n === 1 && currentStep === 1 && !selectedCategory) {
+                alert("يرجى اختيار نوع الخدمة أولاً");
+                return;
+            }
+            if (n === 1 && currentStep === 3) {
+                if (!document.getElementById('projectName').value) {
+                    alert("يرجى إدخال اسم المشروع");
+                    return;
+                }
+            }
+
+            // Hide current step
+            document.getElementById(`step${currentStep}`).classList.remove('active');
+            document.getElementById(`step${currentStep}-indicator`).classList.remove('active');
+            if (n === 1) document.getElementById(`step${currentStep}-indicator`).classList.add('completed');
+
+            // Update current step
+            currentStep += n;
+
+            if (currentStep > 4) {
+                submitFinal();
+                return;
+            }
+
+            // Show new step
+            document.getElementById(`step${currentStep}`).classList.add('active');
+            document.getElementById(`step${currentStep}-indicator`).classList.add('active');
+
+            // Update buttons
+            document.getElementById('prevBtn').style.visibility = (currentStep === 1) ? "hidden" : "visible";
+            document.getElementById('nextBtn').innerText = (currentStep === 4) ? "إرسال البصمة الإبداعية" : "التالي";
+
+            // Update summary
+            document.getElementById('summary-name').innerText = document.getElementById('projectName').value || "-";
+        }
+
+        function submitFinal() {
+            const data = {
+                category: selectedCategory,
+                name: document.getElementById('projectName').value,
+                email: document.getElementById('clientEmail').value
+            };
+            alert(`شكراً لك ${document.getElementById('clientName').value}!\nتم استلام البصمة الإبداعية لمشروعكم: ${data.name}.\nسيتواصل فريقنا معك عبر ${data.email} خلال 24 ساعة.`);
+            window.location.href = "index.html";
+        }
+    </script>
+
+    <footer>
+        <div class="container footer-content" style="padding: 40px 0;">
+            <p>&copy; 2026 توكن للحلول الرقمية. جميع الحقوق محفوظة.</p>
+        </div>
+    </footer>
+    <script type="module" src="antigravity.js"></script>
+</body>
+
+</html>

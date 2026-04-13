@@ -1,0 +1,69 @@
+<svg width="800" height="800" viewBox="0 0 800 800" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- Primary Gradient: Cyber Lime to Cyan -->
+    <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#ADFF2F;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#00E5FF;stop-opacity:1" />
+    </linearGradient>
+    
+    <!-- Accent Gradient: Indigo to Cyan -->
+    <linearGradient id="grad2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#4A00E0;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#00E5FF;stop-opacity:1" />
+    </linearGradient>
+
+    <!-- Background Gradient: Dark Indigo -->
+    <radialGradient id="bgGrad" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" style="stop-color:#1A1A2E;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0F111A;stop-opacity:1" />
+    </radialGradient>
+
+    <!-- Glow Filter -->
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="12" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+
+    <!-- Strong Glow Filter for Background -->
+    <filter id="bgGlow" x="-80%" y="-80%" width="260%" height="260%">
+      <feGaussianBlur stdDeviation="25" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+
+    <!-- Symbol Definition (One Wing) -->
+    <symbol id="wing_v2">
+      <path d="M 400 400 
+               Q 350 350, 280 280
+               Q 340 240, 400 150
+               Q 460 240, 520 280
+               Q 450 350, 400 400 Z" 
+            fill="url(#grad1)" filter="url(#glow)" />
+      <!-- Inner Detail -->
+      <path d="M 400 380 
+               Q 360 340, 310 290
+               Q 355 260, 400 190
+               Q 445 260, 490 290
+               Q 440 340, 400 380 Z" 
+            fill="url(#grad2)" opacity="0.7" />
+    </symbol>
+  </defs>
+
+  <!-- Background Circle with Glow -->
+  <circle cx="400" cy="400" r="380" fill="url(#bgGrad)" />
+  
+  <!-- Outer Ring Glow (Cyan) -->
+  <circle cx="400" cy="400" r="380" fill="none" stroke="#00E5FF" stroke-width="3" opacity="0.3" filter="url(#bgGlow)" />
+  
+  <!-- Inner Ring Glow (Lime) -->
+  <circle cx="400" cy="400" r="350" fill="none" stroke="#ADFF2F" stroke-width="2" opacity="0.2" filter="url(#bgGlow)" />
+
+  <!-- Center Point Glow -->
+  <circle cx="400" cy="400" r="15" fill="#FFFFFF" filter="url(#glow)" opacity="0.9" />
+
+  <!-- Rotating the wings to form the symmetrical cross (4 wings) -->
+  <use href="#wing_v2" transform="rotate(0 400 400)" />
+  <use href="#wing_v2" transform="rotate(90 400 400)" />
+  <use href="#wing_v2" transform="rotate(180 400 400)" />
+  <use href="#wing_v2" transform="rotate(270 400 400)" />
+
+</svg>

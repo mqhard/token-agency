@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تطوير الهوية الرقمية والإبداع | توكن</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .hero-logo-pulsing {
+            width: 200px;
+            height: 200px;
+            margin: 0 auto 30px;
+            animation: pulse-scale 3s ease-in-out infinite;
+            filter: drop-shadow(0 0 30px rgba(173, 255, 47, 0.6)) drop-shadow(0 0 60px rgba(0, 229, 255, 0.4));
+        }
+
+        .pulsing-logo {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: block;
+        }
+
+        @keyframes pulse-scale {
+            0%, 100% {
+                transform: scale(1);
+                filter: drop-shadow(0 0 30px rgba(173, 255, 47, 0.6)) drop-shadow(0 0 60px rgba(0, 229, 255, 0.4));
+            }
+            50% {
+                transform: scale(1.1);
+                filter: drop-shadow(0 0 50px rgba(173, 255, 47, 0.8)) drop-shadow(0 0 100px rgba(0, 229, 255, 0.6));
+            }
+        }
+    </style>
+    <!-- Import map for Three.js -->
+    <script type="importmap">
+        {
+            "imports": {
+                "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+                "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <canvas id="webgl-canvas"></canvas>
+    <header class="navbar">
+        <div class="container nav-content">
+            <a class="logo" href="index.html">
+                <img src="logo.svg" alt="توكن شعار" class="logo-icon logo-image">
+                <span class="logo-text">توكن</span>
+            </a>
+            <nav class="nav-links">
+                <a href="about.html">من نحن</a>
+                <a href="index.html#services">الخدمات</a>
+                <a href="community.html">المجتمع</a>
+                <a href="index.html#contact">تواصل معنا</a>
+            </nav>
+            <div class="nav-actions">
+                <a href="en.html" class="lang-switch" title="English / انجليزي">EN</a>
+                <a href="index.html#discover" class="btn btn-primary">اكتشف حلولنا</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Identity Hero (99designs style) -->
+        <section class="identity-hero">
+            <div class="container" style="display:flex; align-items:center; flex-wrap:wrap; gap:40px;">
+                <div class="identity-hero-text">
+                    <h1>تطوير الهوية الرقمية والإبداع المتقدم لعملك</h1>
+                    <p>منصة توكن الإبداعية لتطوير الحلول الرقمية: تصميم شعارات، مواقع ويب، إرشادات العلامة التجارية والمزيد.
+                        لأن التصميم المطور يصنع أعمالاً عظيمة.</p>
+                    <a href="#categories" class="btn btn-primary">ابدأ تصميمك الآن</a>
+
+                    <div class="category-tags">
+                        <span style="color:var(--text-muted); align-self:center;">الأكثر طلباً:</span>
+                        <a href="#" class="category-tag">تصميم شعار</a>
+                        <a href="#" class="category-tag">مواقع الويب</a>
+                        <a href="#" class="category-tag">الهوية البصرية</a>
+                    </div>
+                </div>
+                <div class="identity-hero-image">
+                    <div class="logo-wrapper">
+                        <div class="hero-logo-pulsing">
+                            <img src="logo.svg" alt="توكن - تطوير الهوية الرقمية" class="pulsing-logo">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Categories Grid -->
+        <section id="categories" class="identity-categories">
+            <div class="container">
+                <div style="display:flex; justify-content:space-between; align-items:flex-end;">
+                    <h2 style="font-size:2.5rem; margin-bottom:10px;">استكشف تخصصاتنا الإبداعية</h2>
+                    <a href="#" style="color:var(--primary-lime); text-decoration:none; font-weight:700;">عرض كل خدماتنا
+                        ←</a>
+                </div>
+
+                <div class="identity-category-grid">
+                    <a href="#" class="identity-category-card">
+                        <span class="icon">✨</span>
+                        <h3>الشعارات والهوية</h3>
+                    </a>
+                    <a href="#" class="identity-category-card">
+                        <span class="icon">🌐</span>
+                        <h3>مواقع وتطبيقات</h3>
+                    </a>
+                    <a href="#" class="identity-category-card">
+                        <span class="icon">📢</span>
+                        <h3>الإعلانات والأعمال</h3>
+                    </a>
+                    <a href="#" class="identity-category-card">
+                        <span class="icon">🎨</span>
+                        <h3>تصميم ورسوميات</h3>
+                    </a>
+                    <a href="#" class="identity-category-card">
+                        <span class="icon">📦</span>
+                        <h3>التعبئة والتغليف</h3>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Showcase Masonry (Inspiration) -->
+        <section class="showcase-section">
+            <div class="container">
+                <h2 style="font-size:2.5rem; text-align:center; margin-bottom:50px;">علامتك التجارية تستحق تصميماً
+                    استثنائياً</h2>
+                <div class="showcase-masonry">
+                    <div class="showcase-item" style="background: linear-gradient(45deg, #161a2b, #2a3150);"></div>
+                    <div class="showcase-item" style="background: linear-gradient(45deg, #4A00E0, #8E2DE2);"></div>
+                    <div class="showcase-item" style="background: linear-gradient(45deg, #00E5FF, #0052D4);"></div>
+                    <div class="showcase-item" style="background: linear-gradient(45deg, #FF007A, #4A00E0);"></div>
+                    <div class="showcase-item" style="background: linear-gradient(45deg, #104547, #062628);"></div>
+                    <div class="showcase-item" style="background: linear-gradient(45deg, #2d1b4e, #1a0b35);"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Dual Flow Section: Express vs Agency -->
+        <section class="dual-flow-section">
+            <div class="container">
+                <h2 style="text-align:center; font-size:2.5rem; margin-bottom:20px;">كل شيء يبدأ من الشعار</h2>
+                <p style="text-align:center; color:var(--text-muted); max-width:700px; margin:0 auto 50px;">سواء كنت
+                    تبدأ لأول مرة، أو تعيد إطلاق علامتك التجارية، لدينا المسار المناسب للارتقاء بهويتك الرقمية.</p>
+
+                <div class="dual-flow-container">
+                    <div class="flow-card">
+                        <h3>المسار السريع</h3>
+                        <p>اصنع هوية مرئية متكاملة باختيارك من باقاتنا السريعة. خيار مثالي للانطلاقات السريعة واختبار
+                            السوق بأسعار تنافسية وخيارات متعددة من مصممينا.</p>
+                        <a href="#" class="btn"
+                            style="border:1px solid var(--text-muted); margin-top:20px; color:white;">باقات تبدأ من
+                            $299</a>
+                    </div>
+
+                    <div class="flow-card highlight-flow">
+                        <h3>التخطيط الاستراتيجي الشامل</h3>
+                        <p>اعمل مباشرة مع فريق من خبراء بناء العلامات التجارية لدينا، لتطوير استراتيجية متكاملة تضمن لك
+                            الاستدامة والتميز في سوق العمل لسنوات قادمة.</p>
+                        <a href="#" class="btn btn-primary" style="margin-top:20px;">تحدث مع خبير توكن</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <div class="container footer-content" style="padding: 40px 0;">
+            <p>&copy; 2026 توكن للحلول الرقمية. جميع الحقوق محفوظة.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script type="module" src="antigravity.js"></script>
+</body>
+
+</html>

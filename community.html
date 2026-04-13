@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>المجتمع | توكن</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <!-- Import map for Three.js -->
+    <script type="importmap">
+        {
+            "imports": {
+                "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+                "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <canvas id="webgl-canvas"></canvas>
+    <header class="navbar">
+        <div class="container nav-content">
+            <a class="logo" href="index.html">
+                <img src="logo.svg" alt="توكن شعار" class="logo-icon logo-image">
+                <span class="logo-text">توكن</span>
+            </a>
+            <nav class="nav-links">
+                <a href="about.html">من نحن</a>
+                <a href="index.html#services">الخدمات</a>
+                <a href="community.html">المجتمع</a>
+                <a href="index.html#contact">تواصل معنا</a>
+            </nav>
+            <div class="nav-actions">
+                <a href="en.html" class="lang-switch" title="English / انجليزي">EN</a>
+                <a href="index.html#discover" class="btn btn-primary">اكتشف حلولنا</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="alux-hero">
+            <div class="container">
+                <h1>المكان الذي يستلهم منه قادة الغد!</h1>
+                <p>انضم إلى مجتمعنا المعرفي المتنامي وانطلق في رحلة نحو التميز الرقمي المستدام والأعمال الناجحة.</p>
+                <div style="display:flex; justify-content:center; gap: 20px;">
+                    <a href="#" class="btn btn-primary">حمل التطبيق</a>
+                    <a href="#courses" class="btn"
+                        style="border: 1px solid var(--primary-lime); color: var(--primary-lime);">استكشف الدورات</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Premium Courses -->
+        <section id="courses" class="alux-section" style="background-color: var(--bg-dark);">
+            <div class="container">
+                <div class="alux-section-title">
+                    <h2>استثمر في نفسك</h2>
+                    <p>تجارب تعليمية متميزة مصممة خصيصاً من توكن</p>
+                </div>
+                <div class="courses-grid">
+                    <div class="alux-course-card">
+                        <div class="course-thumb">🎯</div>
+                        <div class="course-info">
+                            <h3>احتراف الاستثمار الرقمي</h3>
+                            <div class="course-meta">
+                                <span>📚 45 درس</span>
+                                <span>|</span>
+                                <span>شهادة توكن المعتمدة</span>
+                            </div>
+                            <p>الدورة الشاملة لكل من يريد البدء والتوسع في الاستثمارات الرقمية بثقة.</p>
+                            <div class="course-price">
+                                <span>$249</span>
+                                <a href="#" class="btn btn-primary" style="padding: 8px 20px; font-size:1rem;">سجل
+                                    الآن</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="alux-course-card">
+                        <div class="course-thumb" style="background: linear-gradient(45deg, #FF007A, #4A00E0);">🧠</div>
+                        <div class="course-info">
+                            <h3>عقلية الرواد والإنتاجية</h3>
+                            <div class="course-meta">
+                                <span>📚 40 درس</span>
+                                <span>|</span>
+                                <span>6 وحدات متكاملة</span>
+                            </div>
+                            <p>دليلك نحو بناء عقلية استراتيجية وزيادة الإنتاجية لتواكب تسارع الأعمال.</p>
+                            <div class="course-price">
+                                <span>$199</span>
+                                <a href="#" class="btn btn-primary" style="padding: 8px 20px; font-size:1rem;">سجل
+                                    الآن</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="alux-course-card">
+                        <div class="course-thumb" style="background: linear-gradient(45deg, #00E5FF, #0052D4);">⚙️</div>
+                        <div class="course-info">
+                            <h3>بناء الهوية المؤسسية</h3>
+                            <div class="course-meta">
+                                <span>📚 35 درس</span>
+                                <span>|</span>
+                                <span>لرواد الأعمال</span>
+                            </div>
+                            <p>ورش عمل ودورس مفصلة لتصميم هوية بصرية وحسية لا تُنسى من الصفر.</p>
+                            <div class="course-price">
+                                <span>$499</span>
+                                <a href="#" class="btn btn-primary" style="padding: 8px 20px; font-size:1rem;">سجل
+                                    الآن</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Valuable Content -->
+        <section class="alux-section" style="background-color: var(--bg-card);">
+            <div class="container">
+                <div class="alux-section-title">
+                    <h2>محتوى قــــــيّم</h2>
+                    <p>استمتع بموارد مجانية حصرية من مكتبة توكن</p>
+                </div>
+
+                <div class="content-grid">
+                    <a href="#" class="content-card bg-video">
+                        <h3>فيديوهات ملهمة</h3>
+                        <span>استكشف المكتبة &larr;</span>
+                    </a>
+                    <a href="#" class="content-card bg-post">
+                        <h3>مقالات وإضاءات</h3>
+                        <span>تصفح المقالات &larr;</span>
+                    </a>
+                    <a href="#" class="content-card bg-podcast">
+                        <h3>بودكاست توكن</h3>
+                        <span>استمع الآن &larr;</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Newsletter Section -->
+        <section class="alux-section"
+            style="background-color: #0a0b10; border-top: 1px solid rgba(255,255,255,0.05); text-align: center;">
+            <div class="container">
+                <div style="max-width: 600px; margin: 0 auto;">
+                    <h2 style="font-size: 2rem; margin-bottom: 20px;">النشرة الأسبوعية لرواد الأعمال</h2>
+                    <p style="color: var(--text-muted); margin-bottom: 30px;">اقرأ عن الثروة، الابتكار، والنجاح
+                        المستدام. أكثر من 100,000 رائد أعمال يتابعوننا.</p>
+                    <form style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;">
+                        <input type="email" placeholder="بريدك الإلكتروني"
+                            style="padding: 15px 20px; border-radius: var(--border-radius); border: 1px solid rgba(255,255,255,0.1); background: var(--bg-card); color: white; min-width: 300px; flex: 1;">
+                        <button type="button" class="btn btn-primary" style="border-radius: var(--border-radius);">اشترك
+                            الآن</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <div class="container footer-content" style="padding: 40px 0;">
+            <div
+                style="display:flex; justify-content:space-between; flex-wrap:wrap; gap:30px; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 30px; margin-bottom: 30px;">
+                <div>
+                    <div class="logo">
+                        <svg class="logo-icon svg-logo" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                            <defs>
+                                <linearGradient id="token-grad-footer" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" stop-color="var(--primary-lime)"/>
+                                    <stop offset="100%" stop-color="var(--accent-cyan)"/>
+                                </linearGradient>
+                            </defs>
+                            <g fill="url(#token-grad-footer)" stroke="url(#token-grad-footer)">
+                                <circle cx="50" cy="50" r="46" fill="none" stroke-width="4"/>
+                                <path d="M 50,50 Q 40,35 22,32 Q 40,20 50,8 Q 60,20 78,32 Q 60,35 50,50 Z" stroke="none"/>
+                                <path d="M 50,50 Q 65,40 68,22 Q 80,40 92,50 Q 80,60 68,78 Q 65,60 50,50 Z" stroke="none"/>
+                                <path d="M 50,50 Q 60,65 78,68 Q 60,80 50,92 Q 40,80 22,68 Q 40,65 50,50 Z" stroke="none"/>
+                                <path d="M 50,50 Q 35,60 32,78 Q 20,60 8,50 Q 20,40 32,22 Q 35,40 50,50 Z" stroke="none"/>
+                            </g>
+                        </svg>
+                        توكن
+                    </div>
+                </div>
+                <div style="display:flex; gap: 40px;">
+                    <div style="display:flex; flex-direction: column; gap:10px;">
+                        <h4 style="color: var(--text-main);">الشركة</h4>
+                        <a href="#" style="color: var(--text-muted); text-decoration:none;">عن توكن</a>
+                        <a href="#" style="color: var(--text-muted); text-decoration:none;">تواصل معنا</a>
+                        <a href="#" style="color: var(--text-muted); text-decoration:none;">الخصوصية</a>
+                    </div>
+                    <div style="display:flex; flex-direction: column; gap:10px;">
+                        <h4 style="color: var(--text-main);">الموارد</h4>
+                        <a href="#" style="color: var(--text-muted); text-decoration:none;">التطبيق</a>
+                        <a href="#courses" style="color: var(--text-muted); text-decoration:none;">الدورات</a>
+                        <a href="#" style="color: var(--text-muted); text-decoration:none;">المدونة</a>
+                    </div>
+                </div>
+            </div>
+            <p>&copy; 2026 توكن للحلول الرقمية. جميع الحقوق محفوظة.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script type="module" src="antigravity.js"></script>
+</body>
+
+</html>
