@@ -14,10 +14,11 @@ export default async function handler(req, res) {
 
   sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
-  // Send to n8n if URL is provided
-  if (process.env.N8N_WEBHOOK_URL) {
+  // Send to Automation Webhook (Make.com, n8n, etc.) if URL is provided
+  const webhookUrl = process.env.WEBHOOK_URL || process.env.N8N_WEBHOOK_URL;
+  if (webhookUrl) {
     try {
-      await fetch(process.env.N8N_WEBHOOK_URL, {
+      await fetch(webhookUrl, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
