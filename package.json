@@ -4,7 +4,7 @@
   "description": "Token Digital Agency Website",
   "main": "index.js",
   "dependencies": {
-    "@sendgrid/mail": "^8.1.1"
+    "resend": "^3.2.0"
   },
   "engines": {
     "node": ">=18"
