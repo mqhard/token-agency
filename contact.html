@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تواصل معنا | توكن</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        html, body {
+            width: 100%;
+            height: 100%;
+            overflow-x: hidden;
+        }
+
+        body {
+            background: transparent;
+            color: var(--text-main);
+            font-family: var(--font-family);
+            position: relative;
+        }
+
+        #webgl-canvas {
+            position: fixed !important;
+            top: 0 !important;
+            left: 0 !important;
+            width: 100% !important;
+            height: 100% !important;
+            z-index: -1 !important;
+            pointer-events: none !important;
+            display: block !important;
+        }
+
+        .contact-hero {
+            padding: 80px 0 120px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-hero h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, var(--primary-lime), var(--accent-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .contact-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 80px 20px;
+        }
+
+        .contact-form {
+            background: rgba(22, 26, 43, 0.3);
+            border: 1px solid rgba(173, 255, 47, 0.2);
+            padding: 40px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 10px;
+            color: var(--primary-lime);
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 15px;
+            background: rgba(15, 17, 26, 0.5);
+            border: 1px solid rgba(173, 255, 47, 0.2);
+            border-radius: 8px;
+            color: var(--text-main);
+            font-family: var(--font-family);
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary-lime);
+            background: rgba(15, 17, 26, 0.7);
+            box-shadow: 0 0 20px rgba(173, 255, 47, 0.2);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 150px;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, var(--primary-lime), var(--accent-cyan));
+            color: var(--bg-dark);
+            border: none;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(173, 255, 47, 0.3);
+        }
+
+        .submit-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .message-status {
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: none;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        .message-status.success {
+            background: rgba(0, 229, 255, 0.2);
+            color: var(--accent-cyan);
+            border: 1px solid var(--accent-cyan);
+            display: block;
+        }
+
+        .message-status.error {
+            background: rgba(255, 67, 67, 0.2);
+            color: #ff4343;
+            border: 1px solid #ff4343;
+            display: block;
+        }
+
+        @media (max-width: 768px) {
+            .contact-hero h1 {
+                font-size: 2rem;
+            }
+
+            .contact-form {
+                padding: 25px;
+            }
+        }
+    </style>
+    <!-- Import map for Three.js -->
+    <script type="importmap">
+        {
+            "imports": {
+                "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+                "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+            }
+        }
+    </script>
+</head>
+<body>
+    <canvas id="webgl-canvas"></canvas>
+    <header class="navbar">
+        <div class="container nav-content">
+            <a class="logo" href="index.html">
+                <img src="logo.svg" alt="توكن شعار" class="logo-icon logo-image">
+                <span class="logo-text">توكن</span>
+            </a>
+            <nav class="nav-links">
+                <a href="about.html">من نحن</a>
+                <a href="index.html#services">الخدمات</a>
+                <a href="community.html">المجتمع</a>
+                <a href="contact.html" style="color: var(--primary-lime);">تواصل معنا</a>
+            </nav>
+            <div class="nav-actions">
+                <a href="en-contact.html" class="lang-switch" title="English / انجليزي">EN</a>
+                <a href="order.html" class="btn btn-primary">ابدأ مشروعك</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="contact-hero">
+            <div class="container">
+                <h1>تواصل معنا</h1>
+                <p style="font-size: 1.2rem; color: var(--text-muted); margin-top: 20px;">
+                    نحن هنا لنساعدك! أرسل لنا رسالة وسنرد عليك في أقرب وقت
+                </p>
+            </div>
+        </section>
+
+        <!-- Contact Form -->
+        <div class="container contact-container">
+            <div class="contact-form">
+                <div id="status-message" class="message-status"></div>
+                
+                <form id="contact-form">
+                    <div class="form-group">
+                        <label for="name">الاسم الكامل *</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">البريد الإلكتروني *</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phone">رقم الهاتف</label>
+                        <input type="tel" id="phone" name="phone">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="message">الرسالة *</label>
+                        <textarea id="message" name="message" required></textarea>
+                    </div>
+
+                    <button type="submit" class="submit-btn">إرسال الرسالة</button>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <footer style="background: rgba(15, 17, 26, 0.8); border-top: 1px solid rgba(173, 255, 47, 0.2); padding: 40px 0; margin-top: 100px; text-align: center;">
+        <div class="container">
+            <p style="color: var(--text-muted);">© 2024 توكن - TOKEN. جميع الحقوق محفوظة.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script type="module" src="antigravity.js"></script>
+    <script type="module">
+        import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2';
+
+        const SUPABASE_URL = 'https://hteaoyzcvctklehktwnp.supabase.co';
+        const SUPABASE_KEY = 'sb_publishable__72X3aE1Gx1sg2O6h9qaXg_Mc4Leueh';
+
+        const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
+
+        const form = document.getElementById('contact-form');
+        const statusMessage = document.getElementById('status-message');
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const submitBtn = form.querySelector('.submit-btn');
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'جاري الإرسال...';
+
+            try {
+                const { error } = await supabase
+                    .from('messages')
+                    .insert([
+                        {
+                            name: document.getElementById('name').value,
+                            email: document.getElementById('email').value,
+                            phone: document.getElementById('phone').value || null,
+                            message: document.getElementById('message').value
+                        }
+                    ]);
+
+                if (error) throw error;
+
+                statusMessage.textContent = '✅ تم إرسال رسالتك بنجاح! شكراً لك';
+                statusMessage.className = 'message-status success';
+                form.reset();
+
+                setTimeout(() => {
+                    statusMessage.className = 'message-status';
+                }, 5000);
+            } catch (error) {
+                statusMessage.textContent = '❌ حدث خطأ: ' + error.message;
+                statusMessage.className = 'message-status error';
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'إرسال الرسالة';
+            }
+        });
+    </script>
+</body>
+</html>
