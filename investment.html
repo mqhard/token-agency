@@ -58,7 +58,7 @@
                     <span>متوسط زيادة العائد الاستثماري (ROI)</span>
                 </div>
                 <div class="metric-item">
-                    <h3>$5M+</h3>
+                    <h3>18.75M ر.س+</h3>
                     <span>ميزانيات إعلانية مُدارة بنجاح</span>
                 </div>
                 <div class="metric-item">
@@ -105,7 +105,7 @@
                 <div class="investment-tiers">
                     <div class="tier-card">
                         <h3>النمو المسرع</h3>
-                        <div class="tier-price">يبدأ من $2,000<span>/شهرياً</span></div>
+                        <div class="tier-price">يبدأ من 7,500 ر.س<span>/شهرياً</span></div>
                         <p style="color:var(--text-muted);">للشركات الناشئة المستعدة للانطلاق التجاري واختبار قنوات البيع المباشر.</p>
                         <ul class="tier-features">
                             <li>إدارة حملات Meta & Google</li>
@@ -122,7 +122,7 @@
                         <div class="tier-price">مخصصة حسب الميزانية</div>
                         <p style="color:var(--text-muted);">حلول مؤسسية شاملة تتضمن التدقيق، التحسين، والاستحواذ الكامل للعملاء.</p>
                         <ul class="tier-features">
-                            <li>إدارة ميزانيات تفوق الـ $10,000</li>
+                            <li>إدارة ميزانيات تفوق الـ 37,500 ر.س</li>
                             <li>إطار عمل B2B و B2C مدمج</li>
                             <li>لوحة تحكم (Dashboard) حية للفريق المالي</li>
                             <li>مدير حساب استراتيجي مخصص</li>
@@ -141,33 +141,40 @@
                     <p>نحن هنا للاستماع</p>
                     <h2>جاهز لمضاعفة نموك؟</h2>
                 </div>
-                <form class="b2b-contact-form" onsubmit="event.preventDefault(); alert('تم إرسال طلبك بنجاح. سيتواصل معك أحد خبرائنا قريباً.');">
+                <form class="b2b-contact-form" id="investment-form">
+                    <div data-fs-success style="display:none; padding:15px; border-radius:8px; margin-bottom:20px; text-align:center; font-weight:600; background: rgba(0, 229, 255, 0.2); color: var(--accent-cyan); border: 1px solid var(--accent-cyan);">✅ تم إرسال طلبك بنجاح! سيتواصل معك أحد خبرائنا قريباً</div>
+                    <div data-fs-error style="display:none; padding:15px; border-radius:8px; margin-bottom:20px; text-align:center; font-weight:600; background: rgba(255, 67, 67, 0.2); color: #ff4343; border: 1px solid #ff4343;"></div>
                     <div class="form-group">
                         <label>الاسم الكامل</label>
-                        <input type="text" required placeholder="مثال: أحمد عبد الله">
+                        <input type="text" name="name" required placeholder="مثال: أحمد عبد الله" data-fs-field>
+                        <span data-fs-error="name" style="color: #ff4343; font-size: 0.85rem; display: block; margin-top: 5px;"></span>
                     </div>
                     <div class="form-group">
                         <label>اسم الشركة / المؤسسة</label>
-                        <input type="text" required placeholder="شركة التقنية الحديثة">
+                        <input type="text" name="company" required placeholder="شركة التقنية الحديثة" data-fs-field>
+                        <span data-fs-error="company" style="color: #ff4343; font-size: 0.85rem; display: block; margin-top: 5px;"></span>
                     </div>
                     <div class="form-group">
                         <label>البريد الإلكتروني للعمل</label>
-                        <input type="email" required placeholder="name@company.com">
+                        <input type="email" name="email" required placeholder="name@company.com" data-fs-field>
+                        <span data-fs-error="email" style="color: #ff4343; font-size: 0.85rem; display: block; margin-top: 5px;"></span>
                     </div>
                     <div class="form-group">
                         <label>الميزانية الإعلانية الشهرية المتوقعة</label>
-                        <select>
-                            <option>أقل من $5,000</option>
-                            <option>$5,000 - $15,000</option>
-                            <option>$15,000 - $50,000</option>
-                            <option>أكثر من $50,000</option>
+                        <select name="budget" data-fs-field>
+                            <option>أقل من 18,750 ر.س</option>
+                            <option>18,750 - 56,250 ر.س</option>
+                            <option>56,250 - 187,500 ر.س</option>
+                            <option>أكثر من 187,500 ر.س</option>
                         </select>
+                        <span data-fs-error="budget" style="color: #ff4343; font-size: 0.85rem; display: block; margin-top: 5px;"></span>
                     </div>
                     <div class="form-group">
                         <label>حدثنا عن أهداف شركتك للفترة القادمة</label>
-                        <textarea rows="4" placeholder="نريد زيادة الحصة السوقية عبر الإنترنت بنسبة..."></textarea>
+                        <textarea name="message" rows="4" required placeholder="نريد زيادة الحصة السوقية عبر الإنترنت بنسبة..." data-fs-field></textarea>
+                        <span data-fs-error="message" style="color: #ff4343; font-size: 0.85rem; display: block; margin-top: 5px;"></span>
                     </div>
-                    <button type="submit" class="btn btn-primary" style="width:100%; padding:15px; font-size:1.1rem;">إرسال طلب الاستشارة</button>
+                    <button type="submit" class="btn btn-primary" style="width:100%; padding:15px; font-size:1.1rem;" data-fs-submit-btn>إرسال طلب الاستشارة</button>
                     <p style="text-align:center; font-size:0.85rem; color:var(--text-muted); margin-top:15px;">بضغطك على إرسال، أنت توافق على سياسة الخصوصية الخاصة بنا في معالجة طلبات الشركات.</p>
                 </form>
             </div>
@@ -183,5 +190,10 @@
 
     <script src="script.js"></script>
     <script type="module" src="antigravity.js"></script>
+    <script>
+        window.formspree = window.formspree || function () { (formspree.q = formspree.q || []).push(arguments); };
+        formspree('initForm', { formElement: '#investment-form', formId: 'mkoknbnn' });
+    </script>
+    <script src="https://unpkg.com/@formspree/ajax@1" defer></script>
 </body>
 </html>
