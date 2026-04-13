@@ -14,6 +14,27 @@ export default async function handler(req, res) {
 
   sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
+  // Send to n8n if URL is provided
+  if (process.env.N8N_WEBHOOK_URL) {
+    try {
+      await fetch(process.env.N8N_WEBHOOK_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name,
+          email,
+          phone: phone || 'Not provided',
+          message,
+          source: 'Token Agency Website',
+          submittedAt: new Date().toISOString()
+        }),
+      });
+    } catch (n8nError) {
+      console.error('n8n integration error:', n8nError);
+      // We continue to SendGrid even if n8n fails
+    }
+  }
+
   const msg = {
     to: process.env.TO_EMAIL,
     from: process.env.FROM_EMAIL,
