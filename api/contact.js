@@ -10,10 +10,10 @@ export default async function handler(req, res) {
     return res.status(400).json({ message: 'الرجاء ملء جميع الحقول المطلوبة (الاسم، البريد، الرسالة).' });
   }
 
-  const webhookUrl = process.env.WEBHOOK_URL;
+  const webhookUrl = process.env.WEBHOOK_URL || 'https://script.google.com/macros/s/AKfycbxY1Z51a0usTGCPnR8EzAk3cMAY_OuYCgUiFYUZFbWXCBicNhDkhwQEmPEqLqepAH7Bwg/exec';
 
   if (!webhookUrl) {
-    console.error('WEBHOOK_URL environment variable is not set');
+    console.error('WEBHOOK_URL is not set');
     return res.status(500).json({ message: 'خطأ في إعداد الخادم.' });
   }
 
