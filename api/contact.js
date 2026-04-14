@@ -1,4 +1,4 @@
-const { Resend } = require('resend');
+import { Resend } from 'resend';
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
@@ -14,8 +14,8 @@ export default async function handler(req, res) {
     return res.status(400).json({ message: 'الرجاء ملء جميع الحقول المطلوبة (الاسم، البريد، الرسالة).' });
   }
 
-  // Send to Automation Webhook (Make.com, n8n, etc.) if URL is provided
-  const webhookUrl = process.env.WEBHOOK_URL || process.env.N8N_WEBHOOK_URL;
+  // Send to Make.com Webhook
+  const webhookUrl = process.env.WEBHOOK_URL;
   if (webhookUrl) {
     try {
       await fetch(webhookUrl, {
@@ -24,36 +24,36 @@ export default async function handler(req, res) {
         body: JSON.stringify({
           name,
           email,
-          phone: phone || 'Not provided',
+          phone: phone || 'غير محدد',
           message,
           source: 'Token Agency Website',
           submittedAt: new Date().toISOString()
         }),
       });
-    } catch (n8nError) {
-      console.error('Webhook integration error:', n8nError);
+    } catch (webhookError) {
+      console.error('Webhook error:', webhookError);
+      // Continue to email even if webhook fails
     }
   }
 
+  // Send email via Resend
   try {
-    const fromEmail = process.env.FROM_EMAIL || 'onboarding@resend.dev';
-    const toEmail = process.env.TO_EMAIL;
-
-    if (!toEmail) {
-      throw new Error('TO_EMAIL environment variable is missing');
-    }
-
     await resend.emails.send({
-      from: fromEmail,
-      to: toEmail,
-      subject: `New Contact Form Submission from ${name}`,
+      from: 'onboarding@resend.dev',
+      to: process.env.TO_EMAIL,
+      subject: `رسالة جديدة من العميل: ${name}`,
       html: `
-        <h2>New Contact Form Submission</h2>
-        <p><strong>Name:</strong> ${name}</p>
-        <p><strong>Email:</strong> ${email}</p>
-        <p><strong>Phone:</strong> ${phone || 'Not provided'}</p>
-        <p><strong>Message:</strong></p>
-        <p>${message.replace(/\n/g, '<br>')}</p>
+        <div dir="rtl" style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; background: #0f111a; color: #ffffff; padding: 30px; border-radius: 10px;">
+          <h2 style="color: #adff2f; border-bottom: 1px solid #adff2f33; padding-bottom: 10px;">📩 رسالة جديدة من موقع توكن</h2>
+          <p><strong style="color: #adff2f;">الاسم:</strong> ${name}</p>
+          <p><strong style="color: #adff2f;">البريد الإلكتروني:</strong> ${email}</p>
+          <p><strong style="color: #adff2f;">الهاتف:</strong> ${phone || 'غير محدد'}</p>
+          <p><strong style="color: #adff2f;">الرسالة:</strong></p>
+          <div style="background: #1a1e2e; padding: 15px; border-radius: 8px; border-right: 3px solid #adff2f;">
+            ${message.replace(/\n/g, '<br>')}
+          </div>
+          <p style="color: #666; font-size: 12px; margin-top: 20px;">تم الإرسال في: ${new Date().toLocaleString('ar-SA')}</p>
+        </div>
       `,
     });
 

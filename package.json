@@ -2,7 +2,7 @@
   "name": "token-agency",
   "version": "1.0.0",
   "description": "Token Digital Agency Website",
-  "main": "index.js",
+  "type": "module",
   "dependencies": {
     "resend": "^3.2.0"
   },
