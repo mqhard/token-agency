@@ -2,10 +2,6 @@
   "name": "token-agency",
   "version": "1.0.0",
   "description": "Token Digital Agency Website",
-  "type": "module",
-  "dependencies": {
-    "resend": "^3.2.0"
-  },
   "engines": {
     "node": ">=18"
   }
