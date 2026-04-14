@@ -267,23 +267,17 @@
             const data = Object.fromEntries(formData.entries());
             
             try {
-                const response = await fetch('/api/contact', {
+                // Google Apps Script requires text/plain with no-cors for cross-origin requests
+                await fetch('https://script.google.com/macros/s/AKfycbxY1Z51a0usTGCPnR8EzAk3cMAY_OuYCgUiFYUZFbWXCBicNhDkhwQEmPEqLqepAH7Bwg/exec', {
                     method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
+                    mode: 'no-cors',
+                    headers: { 'Content-Type': 'text/plain' },
                     body: JSON.stringify(data)
                 });
                 
-                const result = await response.json();
-                
-                if (response.ok) {
-                    successMsg.style.display = 'block';
-                    form.reset();
-                } else {
-                    errorMsg.textContent = result.message || 'حدث خطأ ما. حاول مرة أخرى.';
-                    errorMsg.style.display = 'block';
-                }
+                // no-cors means we can't read response, assume success if no exception
+                successMsg.style.display = 'block';
+                form.reset();
             } catch (err) {
                 errorMsg.textContent = 'عذراً، لا يمكن الاتصال بالخادم الآن.';
                 errorMsg.style.display = 'block';

@@ -269,24 +269,18 @@
             submitBtn.textContent = 'جاري الإرسال...';
 
             try {
-                const response = await fetch('/api/contact', {
+                // Google Apps Script requires text/plain with no-cors for cross-origin requests
+                await fetch('https://script.google.com/macros/s/AKfycbxY1Z51a0usTGCPnR8EzAk3cMAY_OuYCgUiFYUZFbWXCBicNhDkhwQEmPEqLqepAH7Bwg/exec', {
                     method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
+                    mode: 'no-cors',
+                    headers: { 'Content-Type': 'text/plain' },
                     body: JSON.stringify(requestData)
                 });
 
-                if (response.ok) {
-                    const successMessage = `شكراً لك ${clientName}!\nتم استلام البصمة الإبداعية لمشروعكم: ${projectName}.\nسيتواصل فريقنا معك عبر ${clientEmail} خلال 24 ساعة.`;
-                    alert(successMessage);
-                    window.location.href = "index.html";
-                } else {
-                    // Handle HTTP errors
-                    const errorData = await response.json().catch(() => ({}));
-                    console.error('Server response:', errorData);
-                    throw new Error(errorData.message || `خطأ في الإرسال: ${response.status}`);
-                }
+                // no-cors means we can't read the response; assume success if no exception
+                const successMessage = `شكراً لك ${clientName}!\nتم استلام البصمة الإبداعية لمشروعكم: ${projectName}.\nسيتواصل فريقنا معك عبر ${clientEmail} خلال 24 ساعة.`;
+                alert(successMessage);
+                window.location.href = 'index.html';
             } catch (error) {
                 console.error('Submission error:', error);
                 alert(`حدث خطأ في الإرسال:\n${error.message}\n\nحاول مرة أخرى أو تواصل معنا مباشرة عبر البريد الإلكتروني.`);
