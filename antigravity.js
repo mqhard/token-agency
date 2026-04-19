@@ -4,240 +4,228 @@ import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
 import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js';
 
 // ---- Scene Setup ---- //
-const canvas = document.getElementById('webgl-canvas');
-const renderer = new THREE.WebGLRenderer({ canvas, alpha: false, antialias: true, powerPreference: "high-performance" });
+const container = document.getElementById('canvas-container');
+const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, powerPreference: "high-performance" });
 renderer.setSize(window.innerWidth, window.innerHeight);
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-renderer.setClearColor(0x0a0f24, 1);
+renderer.toneMapping = THREE.ReinhardToneMapping;
+renderer.toneMappingExposure = 1.5;
+container.appendChild(renderer.domElement);
 
 const scene = new THREE.Scene();
-scene.background = new THREE.Color(0x0a0f24);
-scene.fog = new THREE.FogExp2(0x0a0f24, 0.015);
+scene.background = new THREE.Color(0x05070a);
+scene.fog = new THREE.FogExp2(0x05070a, 0.012);
 
-const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
-camera.position.z = 50;
+const camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 0.1, 1000);
+camera.position.z = 60;
 
 // ---- Post Processing ---- //
 const composer = new EffectComposer(renderer);
 composer.addPass(new RenderPass(scene, camera));
+
 const bloomPass = new UnrealBloomPass(new THREE.Vector2(window.innerWidth, window.innerHeight), 1.5, 0.4, 0.85);
-bloomPass.threshold = 0.1;
-bloomPass.strength = 1.6; // High bloom for neon effect
-bloomPass.radius = 0.6;
+bloomPass.threshold = 0.2;
+bloomPass.strength = 1.2;
+bloomPass.radius = 0.5;
 composer.addPass(bloomPass);
 
-// ---- Particles Constellation Mesh ---- //
-const maxParticleCount = 800;
-const particleGeometry = new THREE.BufferGeometry();
-const particlePositions = new Float32Array(maxParticleCount * 3);
-const particleData = [];
-
-const interactionPlane = new THREE.Plane(new THREE.Vector3(0, 0, 1), 0);
-const raycaster = new THREE.Raycaster();
-
+// ---- Interaction Engine ---- //
 const mouse = new THREE.Vector2(-10, -10);
 const targetMouse = new THREE.Vector2(-10, -10);
-let mouseSpeed = 0;
+const raycaster = new THREE.Raycaster();
+const interactionPlane = new THREE.Plane(new THREE.Vector3(0, 0, 1), 0);
+const mouse3D = new THREE.Vector3();
 
-for (let i = 0; i < maxParticleCount; i++) {
-    const x = (Math.random() - 0.5) * 160;
-    const y = (Math.random() - 0.5) * 160;
-    const z = (Math.random() - 0.5) * 80 - 10;
+window.addEventListener('mousemove', (e) => {
+    targetMouse.x = (e.clientX / window.innerWidth) * 2 - 1;
+    targetMouse.y = -(e.clientY / window.innerHeight) * 2 + 1;
+});
 
-    particlePositions[i * 3] = x;
-    particlePositions[i * 3 + 1] = y;
-    particlePositions[i * 3 + 2] = z;
+// ---- Cursor Light ---- //
+const cursorLight = new THREE.PointLight(0xadff2f, 150, 100); // Lime cursor light
+scene.add(cursorLight);
+// ---- Materials ---- //
+const textureLoader = new THREE.TextureLoader();
+const envMap = textureLoader.load('crystal_ref.jpg');
+envMap.mapping = THREE.EquirectangularReflectionMapping;
 
-    particleData.push({
-        velocity: new THREE.Vector3((Math.random() - 0.5) * 0.05, (Math.random() - 0.5) * 0.05, (Math.random() - 0.5) * 0.05),
-        basePos: new THREE.Vector3(x, y, z),
-        numConnections: 0,
-        tempTarget: new THREE.Vector3()
+// Crystal Colors inspired by input_image_10.png
+const colors = [
+    0xda00ff, // Magenta
+    0x00e5ff, // Cyan
+    0xffd700, // Gold
+    0xff1e00, // Red
+    0x8e2de2  // Violet
+];
+
+function createCrystalMaterial(color) {
+    return new THREE.MeshPhysicalMaterial({
+        color: color,
+        metalness: 0.1,
+        roughness: 0.05,
+        transmission: 0.9,
+        thickness: 2.0,
+        ior: 1.5,
+        iridescence: 0.8,
+        iridescenceIOR: 1.3,
+        sheen: 1,
+        envMap: envMap,
+        envMapIntensity: 1.5,
+        transparent: true,
+        opacity: 0.9
     });
 }
 
-particleGeometry.setAttribute('position', new THREE.BufferAttribute(particlePositions, 3));
+// ---- Crystal Shard Construction ---- //
+const shards = [];
+const shardCount = 120;
+const geometries = [
+    new THREE.OctahedronGeometry(1.5, 0),
+    new THREE.TetrahedronGeometry(2, 0),
+    new THREE.IcosahedronGeometry(1.2, 0)
+];
 
-// Create circle texture for glowing dots
-const canvasDot = document.createElement('canvas');
-canvasDot.width = 16; canvasDot.height = 16;
-const context = canvasDot.getContext('2d');
-context.beginPath();
-context.arc(8, 8, 8, 0, 2 * Math.PI, false);
-context.fillStyle = "white";
-context.fill();
-const dotTexture = new THREE.CanvasTexture(canvasDot);
+for (let i = 0; i < shardCount; i++) {
+    const geo = geometries[Math.floor(Math.random() * geometries.length)];
+    const color = colors[Math.floor(Math.random() * colors.length)];
+    const mat = createCrystalMaterial(color);
+    
+    const shard = new THREE.Mesh(geo, mat);
+    
+    // Initial random positions
+    shard.position.set(
+        (Math.random() - 0.5) * 150,
+        (Math.random() - 0.5) * 100,
+        (Math.random() - 0.5) * 60 - 20
+    );
+    
+    shard.rotation.set(
+        Math.random() * Math.PI,
+        Math.random() * Math.PI,
+        Math.random() * Math.PI
+    );
+    
+    shard.userData = {
+        basePos: shard.position.clone(),
+        velocity: new THREE.Vector3(
+            (Math.random() - 0.5) * 0.05,
+            (Math.random() - 0.5) * 0.05,
+            (Math.random() - 0.5) * 0.05
+        ),
+        rotSpeed: new THREE.Vector3(
+            (Math.random() - 0.5) * 0.02,
+            (Math.random() - 0.5) * 0.02,
+            (Math.random() - 0.5) * 0.02
+        )
+    };
+    
+    scene.add(shard);
+    shards.push(shard);
+}
 
-const pointMaterial = new THREE.PointsMaterial({
-    color: 0xadff2f, // MATCHES: var(--primary-lime)
-    size: 0.8,
-    map: dotTexture,
+// ---- Logo Integration ---- //
+let logoGroup = new THREE.Group();
+scene.add(logoGroup);
+
+// Asset B (Primary Focal Point) - Complex Crystalline Logo
+const logoBTexture = textureLoader.load('logo_b.png');
+const logoBMaterial = new THREE.MeshBasicMaterial({
+    map: logoBTexture,
     transparent: true,
-    opacity: 0.8,
-    blending: THREE.AdditiveBlending,
-    depthWrite: false
+    opacity: 0.9,
+    side: THREE.DoubleSide
 });
+const logoBPlane = new THREE.Mesh(new THREE.PlaneGeometry(35, 35), logoBMaterial);
+logoBPlane.position.z = -10;
+logoGroup.add(logoBPlane);
 
-const particles = new THREE.Points(particleGeometry, pointMaterial);
-scene.add(particles);
-
-// ---- Connecting Lines ---- //
-// Preallocate maximum possible lines based on max count
-const segments = maxParticleCount * maxParticleCount;
-
-const linePositions = new Float32Array(segments * 3);
-const lineColors = new Float32Array(segments * 3);
-
-const lineGeometry = new THREE.BufferGeometry();
-lineGeometry.setAttribute('position', new THREE.BufferAttribute(linePositions, 3));
-lineGeometry.setAttribute('color', new THREE.BufferAttribute(lineColors, 3));
-
-const lineMaterial = new THREE.LineBasicMaterial({
-    color: 0xffffff,
-    vertexColors: true,
+// Asset A (Simplified) - Central floating artifact
+const logoATexture = textureLoader.load('logo_a.jpg');
+const logoAMaterial = new THREE.MeshBasicMaterial({
+    map: logoATexture,
     transparent: true,
-    opacity: 0.6,
-    blending: THREE.AdditiveBlending,
-    depthWrite: false
+    opacity: 0.4,
+    blending: THREE.AdditiveBlending
 });
+const logoAPlane = new THREE.Mesh(new THREE.PlaneGeometry(15, 15), logoAMaterial);
+logoAPlane.position.z = 5;
+logoGroup.add(logoAPlane);
 
-const linesMesh = new THREE.LineSegments(lineGeometry, lineMaterial);
-scene.add(linesMesh);
+// Central Pulsing Light
+const coreLight = new THREE.PointLight(0xda00ff, 20, 100); 
+coreLight.position.set(0, 0, -5);
+scene.add(coreLight);
 
-// Setup Line Colors (Lime to Cyan interpolations for brand consistency)
-const color1 = new THREE.Color(0xadff2f); // Lime Green
-const color2 = new THREE.Color(0x00e5ff); // Cyan
+// ---- Animation Loop ---- //
+const clock = new THREE.Clock();
 
-// ---- Background Scene Only (No internal webGL logos) ---- //
+function animate() {
+    requestAnimationFrame(animate);
+    const delta = clock.getDelta();
+    const time = clock.getElapsedTime();
 
+    // Smooth Mouse Interaction
+    mouse.lerp(targetMouse, 0.1);
+    raycaster.setFromCamera(mouse, camera);
+    raycaster.ray.intersectPlane(interactionPlane, mouse3D);
 
-// ---- Events ---- //
-window.addEventListener('mousemove', (event) => {
-    targetMouse.x = (event.clientX / window.innerWidth) * 2 - 1;
-    targetMouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
-});
+    cursorLight.position.copy(mouse3D);
+    cursorLight.position.z = 15;
 
+    // Pulse core light
+    coreLight.intensity = 15 + Math.sin(time * 2) * 10;
+    coreLight.color.setHSL((Math.sin(time * 0.5) * 0.5 + 0.5), 0.8, 0.5);
+
+    // Antigravity Field Logic
+    const repulsionRadius = 25;
+    const repulsionForce = 40;
+
+    shards.forEach(shard => {
+        // Subtle drift
+        const ud = shard.userData;
+        ud.basePos.add(ud.velocity);
+        
+        // Wrap around
+        if (Math.abs(ud.basePos.x) > 100) ud.basePos.x *= -0.95;
+        if (Math.abs(ud.basePos.y) > 70) ud.basePos.y *= -0.95;
+
+        const targetPos = ud.basePos.clone();
+        const dist = shard.position.distanceTo(mouse3D);
+
+        if (dist < repulsionRadius) {
+            const dir = new THREE.Vector3().subVectors(shard.position, mouse3D).normalize();
+            const power = (1 - dist / repulsionRadius) * repulsionForce;
+            targetPos.add(dir.multiplyScalar(power));
+        }
+
+        // Apply position with smoothing
+        shard.position.lerp(targetPos, 0.05);
+
+        // Rotation
+        shard.rotation.x += ud.rotSpeed.x;
+        shard.rotation.y += ud.rotSpeed.y;
+        shard.rotation.z += ud.rotSpeed.z;
+    });
+
+    // Logo Animation
+    logoGroup.rotation.y = Math.sin(time * 0.2) * 0.1;
+    logoBPlane.material.opacity = 0.7 + Math.sin(time * 1.5) * 0.2;
+
+    // Check if mouse is over center for stronger repulsion
+    if (mouse.length() < 0.2) {
+        // Stronger repulsion when near logo
+        // (Handled by smaller distance check above implicitly but could be boosted)
+    }
+
+    composer.render();
+}
+
+// Window Resize
 window.addEventListener('resize', () => {
     camera.aspect = window.innerWidth / window.innerHeight;
     camera.updateProjectionMatrix();
     renderer.setSize(window.innerWidth, window.innerHeight);
     composer.setSize(window.innerWidth, window.innerHeight);
 });
-
-// ---- Animation Loop ---- //
-const clock = new THREE.Clock();
-const effectController = {
-    minDistance: 12,
-    limitConnections: false,
-    maxConnections: 10,
-    repulsionRadius: 18,
-    repulsionForce: 25
-};
-
-function animate() {
-    requestAnimationFrame(animate);
-    const dt = Math.min(clock.getDelta(), 0.1);
-    const time = clock.getElapsedTime();
-
-    // Mouse Tracking
-    mouse.lerp(targetMouse, 10 * dt);
-    mouseSpeed = Math.abs(mouse.x - targetMouse.x) + Math.abs(mouse.y - targetMouse.y);
-
-    raycaster.setFromCamera(mouse, camera);
-    const intersectPoint = new THREE.Vector3();
-    raycaster.ray.intersectPlane(interactionPlane, intersectPoint);
-
-    // Asset animations removed
-
-    let vertexpos = 0;
-    let colorpos = 0;
-    let numConnected = 0;
-
-    for (let i = 0; i < maxParticleCount; i++) particleData[i].numConnections = 0;
-
-    const repulsionDist = effectController.repulsionRadius + mouseSpeed * 10;
-
-    for (let i = 0; i < maxParticleCount; i++) {
-        const particleDataA = particleData[i];
-
-        // Base velocity
-        particleDataA.basePos.add(particleDataA.velocity);
-
-        // Bounds wrapping
-        if (particleDataA.basePos.y < -80) particleDataA.basePos.y = 80;
-        if (particleDataA.basePos.y > 80) particleDataA.basePos.y = -80;
-        if (particleDataA.basePos.x < -100) particleDataA.basePos.x = 100;
-        if (particleDataA.basePos.x > 100) particleDataA.basePos.x = -100;
-
-        particleDataA.tempTarget.copy(particleDataA.basePos);
-
-        // Interaction with mouse (Repulsion / Parting the network)
-        const currentPosVec = new THREE.Vector3(particlePositions[i * 3], particlePositions[i * 3 + 1], particlePositions[i * 3 + 2]);
-        const distToMouse = currentPosVec.distanceTo(intersectPoint);
-
-        if (distToMouse < repulsionDist) {
-            const dir = new THREE.Vector3().subVectors(currentPosVec, intersectPoint).normalize();
-            const force = Math.pow((1.0 - (distToMouse / repulsionDist)), 2) * effectController.repulsionForce;
-            particleDataA.tempTarget.add(dir.multiplyScalar(force));
-        }
-
-        // Apply easing towards target
-        currentPosVec.lerp(particleDataA.tempTarget, 5 * dt);
-
-        // Update buffers
-        particlePositions[i * 3] = currentPosVec.x;
-        particlePositions[i * 3 + 1] = currentPosVec.y;
-        particlePositions[i * 3 + 2] = currentPosVec.z;
-
-        // Line connections check
-        if (effectController.limitConnections && particleDataA.numConnections >= effectController.maxConnections) continue;
-
-        for (let j = i + 1; j < maxParticleCount; j++) {
-            const particleDataB = particleData[j];
-            if (effectController.limitConnections && particleDataB.numConnections >= effectController.maxConnections) continue;
-
-            const currentPosVecB = new THREE.Vector3(particlePositions[j * 3], particlePositions[j * 3 + 1], particlePositions[j * 3 + 2]);
-            const dist = currentPosVec.distanceTo(currentPosVecB);
-
-            if (dist < effectController.minDistance) {
-                particleDataA.numConnections++;
-                particleDataB.numConnections++;
-
-                const alpha = 1.0 - dist / effectController.minDistance;
-
-                linePositions[vertexpos++] = currentPosVec.x;
-                linePositions[vertexpos++] = currentPosVec.y;
-                linePositions[vertexpos++] = currentPosVec.z;
-
-                linePositions[vertexpos++] = currentPosVecB.x;
-                linePositions[vertexpos++] = currentPosVecB.y;
-                linePositions[vertexpos++] = currentPosVecB.z;
-
-                const c = color1.clone().lerp(color2, alpha);
-
-                lineColors[colorpos++] = c.r * alpha;
-                lineColors[colorpos++] = c.g * alpha;
-                lineColors[colorpos++] = c.b * alpha;
-
-                lineColors[colorpos++] = c.r * alpha;
-                lineColors[colorpos++] = c.g * alpha;
-                lineColors[colorpos++] = c.b * alpha;
-
-                numConnected++;
-            }
-        }
-    }
-
-    linesMesh.geometry.setDrawRange(0, numConnected * 2);
-    linesMesh.geometry.attributes.position.needsUpdate = true;
-    linesMesh.geometry.attributes.color.needsUpdate = true;
-    particles.geometry.attributes.position.needsUpdate = true;
-
-    // Slight floating camera rotation
-    scene.rotation.y = Math.sin(time * 0.1) * 0.1;
-    scene.rotation.x = Math.cos(time * 0.1) * 0.05;
-
-    composer.render();
-}
 
 animate();
