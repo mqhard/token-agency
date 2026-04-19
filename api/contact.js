@@ -10,7 +10,7 @@ export default async function handler(req, res) {
     return res.status(400).json({ message: 'الرجاء ملء جميع الحقول المطلوبة (الاسم، البريد، الرسالة).' });
   }
 
-  const webhookUrl = process.env.WEBHOOK_URL || 'https://script.google.com/macros/s/AKfycbxY1Z51a0usTGCPnR8EzAk3cMAY_OuYCgUiFYUZFbWXCBicNhDkhwQEmPEqLqepAH7Bwg/exec';
+  const webhookUrl = process.env.WEBHOOK_URL || 'https://script.google.com/macros/s/AKfycbw0HNwRSA85TPyoKUGKQqOaktOpmgd-d5AoTk70RwbjbU9Hg0RTkMUu3CPrhg2E9rC6Eg/exec';
 
   if (!webhookUrl) {
     console.error('WEBHOOK_URL is not set');

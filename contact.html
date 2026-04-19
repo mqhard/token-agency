@@ -50,6 +50,7 @@
             margin-bottom: 20px;
             background: linear-gradient(135deg, var(--primary-lime), var(--accent-cyan));
             -webkit-background-clip: text;
+            background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
@@ -209,7 +210,7 @@
                 <div data-fs-success style="display: none; padding: 15px; border-radius: 8px; margin-bottom: 20px; text-align: center; font-weight: 600; background: rgba(0, 229, 255, 0.2); color: var(--accent-cyan); border: 1px solid var(--accent-cyan);">✅ تم إرسال رسالتك بنجاح! شكراً لك، سنرد عليك قريباً</div>
                 <div data-fs-error style="display: none; padding: 15px; border-radius: 8px; margin-bottom: 20px; text-align: center; font-weight: 600; background: rgba(255, 67, 67, 0.2); color: #ff4343; border: 1px solid #ff4343;"></div>
                 
-                <form id="contact-form">
+                <form id="contact-form" method="POST">
                     <div class="form-group">
                         <label for="name">الاسم الكامل *</label>
                         <input type="text" id="name" name="name" required data-fs-field>
@@ -249,42 +250,45 @@
     <script src="script.js"></script>
     <script type="module" src="antigravity.js"></script>
     <script>
+        // Form Handling logic
         document.getElementById('contact-form').addEventListener('submit', async function(e) {
             e.preventDefault();
             
             const form = e.target;
             const submitBtn = form.querySelector('[data-fs-submit-btn]');
-            const successMsg = document.querySelector('[data-fs-success]');
             const errorMsg = document.querySelector('[data-fs-error]');
             
             // Reset state
-            successMsg.style.display = 'none';
-            errorMsg.style.display = 'none';
+            if(errorMsg) errorMsg.style.display = 'none';
             submitBtn.disabled = true;
             submitBtn.textContent = 'جاري الإرسال...';
             
             const formData = new FormData(form);
             const data = Object.fromEntries(formData.entries());
             
-            try {
-                // Google Apps Script requires text/plain with no-cors for cross-origin requests
-                await fetch('https://script.google.com/macros/s/AKfycbxY1Z51a0usTGCPnR8EzAk3cMAY_OuYCgUiFYUZFbWXCBicNhDkhwQEmPEqLqepAH7Bwg/exec', {
-                    method: 'POST',
-                    mode: 'no-cors',
-                    headers: { 'Content-Type': 'text/plain' },
-                    body: JSON.stringify(data)
-                });
-                
-                // no-cors means we can't read response, assume success if no exception
-                successMsg.style.display = 'block';
-                form.reset();
-            } catch (err) {
-                errorMsg.textContent = 'عذراً، لا يمكن الاتصال بالخادم الآن.';
-                errorMsg.style.display = 'block';
-            } finally {
-                submitBtn.disabled = false;
-                submitBtn.textContent = 'إرسال الرسالة';
-            }
+            await window.TOKEN_SUBMIT(
+                data,
+                () => {
+                    // Success callback
+                    if (typeof window.showFormSuccess === 'function') {
+                        window.showFormSuccess('contact-form');
+                    } else {
+                        alert('تم إرسال رسالتك بنجاح! شكراً لك.');
+                        form.reset();
+                    }
+                },
+                (err) => {
+                    // Error callback
+                    if(errorMsg) {
+                        errorMsg.textContent = 'عذراً، حدث خطأ أثناء الإرسال. يرجى المحاولة لاحقاً.';
+                        errorMsg.style.display = 'block';
+                    } else {
+                        alert('عذراً، حدث خطأ أثناء الإرسال.');
+                    }
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = 'إرسال الرسالة';
+                }
+            );
         });
     </script>
 </body>

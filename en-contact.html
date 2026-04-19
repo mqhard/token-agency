@@ -50,6 +50,7 @@
             margin-bottom: 20px;
             background: linear-gradient(135deg, var(--primary-lime), var(--accent-cyan));
             -webkit-background-clip: text;
+            background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
@@ -209,7 +210,7 @@
                 <div data-fs-success style="display: none; padding: 15px; border-radius: 8px; margin-bottom: 20px; text-align: center; font-weight: 600; background: rgba(0, 229, 255, 0.2); color: var(--accent-cyan); border: 1px solid var(--accent-cyan);">✅ Your message has been sent successfully! Thank you, we will reply soon</div>
                 <div data-fs-error style="display: none; padding: 15px; border-radius: 8px; margin-bottom: 20px; text-align: center; font-weight: 600; background: rgba(255, 67, 67, 0.2); color: #ff4343; border: 1px solid #ff4343;"></div>
                 
-                <form id="contact-form">
+                <form id="contact-form" method="POST">
                     <div class="form-group">
                         <label for="name">Full Name *</label>
                         <input type="text" id="name" name="name" required data-fs-field>
@@ -249,38 +250,48 @@
     <script src="script.js"></script>
     <script type="module" src="antigravity.js"></script>
     <script>
+        // Form Handling logic
         document.getElementById('contact-form').addEventListener('submit', async function(e) {
-            e.preventDefault();
+            e.preventDefault(); // Stop default submission immediately
+            console.log('Form submission started');
             
             const form = e.target;
             const submitBtn = form.querySelector('[data-fs-submit-btn]');
-            const successMsg = document.querySelector('[data-fs-success]');
             const errorMsg = document.querySelector('[data-fs-error]');
             
             // Reset state
-            successMsg.style.display = 'none';
-            errorMsg.style.display = 'none';
+            if(errorMsg) errorMsg.style.display = 'none';
             submitBtn.disabled = true;
             submitBtn.textContent = 'Sending...';
             
             const formData = new FormData(form);
             const data = Object.fromEntries(formData.entries());
             
+            console.log('Sending data:', data);
+            
             try {
-                // Google Apps Script requires text/plain with no-cors for cross-origin requests
-                await fetch('https://script.google.com/macros/s/AKfycbxY1Z51a0usTGCPnR8EzAk3cMAY_OuYCgUiFYUZFbWXCBicNhDkhwQEmPEqLqepAH7Bwg/exec', {
+                // To avoid CORS issues, we use no-cors and text/plain
+                await fetch(window.TOKEN_CONFIG.webhookUrl, {
                     method: 'POST',
                     mode: 'no-cors',
                     headers: { 'Content-Type': 'text/plain' },
                     body: JSON.stringify(data)
                 });
                 
-                // no-cors means we can't read the response; assume success if no exception
-                successMsg.style.display = 'block';
-                form.reset();
+                console.log('Success (no-cors response received)');
+                // call the success UI from script.js if available, else show basic alert
+                if (typeof window.showFormSuccess === 'function') {
+                    window.showFormSuccess('contact-form');
+                } else {
+                    alert('Your message has been received! Thank you.');
+                    form.reset();
+                }
             } catch (err) {
-                errorMsg.textContent = 'Sorry, could not connect. Please try again.';
-                errorMsg.style.display = 'block';
+                console.error('Submission error:', err);
+                if(errorMsg) {
+                    errorMsg.textContent = 'Sorry, an error occurred during submission. Please try again later.';
+                    errorMsg.style.display = 'block';
+                }
             } finally {
                 submitBtn.disabled = false;
                 submitBtn.textContent = 'Send Message';

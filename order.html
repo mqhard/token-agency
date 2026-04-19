@@ -62,7 +62,7 @@
                     </div>
                 </div>
 
-                <form id="briefForm">
+                <form id="briefForm" method="POST">
                     <!-- Step 1: Category Selection -->
                     <div class="brief-step active" id="step1">
                         <h2 style="text-align: center; margin-bottom: 30px;">ما هو نوع الحل الإبداعي الذي تحتاجه؟</h2>
@@ -238,24 +238,19 @@
             const clientName = document.getElementById('clientName').value;
             const clientEmail = document.getElementById('clientEmail').value;
             const projectName = document.getElementById('projectName').value;
-            const industry = document.getElementById('industry').value;
-            const vision = document.getElementById('vision').value;
-            const budget = document.getElementById('budget').value;
-            const styleClassicModern = document.getElementById('style-classic-modern').value;
-            const styleSimpleBold = document.getElementById('style-simple-bold').value;
-            const styleElegantPractical = document.getElementById('style-elegant-practical').value;
+            const privacyConsent = true; // Implicit by clicking submit
 
             const messageBody = `تفاصيل المشروع:
 - نوع الخدمة: ${selectedCategory}
 - اسم المشروع/العلامة التجارية: ${projectName}
-- المجال: ${industry || 'غير محدد'}
-- الميزانية المحددة: ${budget}
-- الرؤية والوصف: ${vision || 'غير محدد'}
+- المجال: ${document.getElementById('industry').value || 'غير محدد'}
+- الميزانية المحددة: ${document.getElementById('budget').value}
+- الرؤية والوصف: ${document.getElementById('vision').value || 'غير محدد'}
 
 طابع التصميم:
-- كلاسيكي (1) إلى عصري (100): ${styleClassicModern}
-- بسيط (1) إلى جريء (100): ${styleSimpleBold}
-- أنيق (1) إلى عملي (100): ${styleElegantPractical}`;
+- كلاسيكي (1) إلى عصري (100): ${document.getElementById('style-classic-modern').value}
+- بسيط (1) إلى جريء (100): ${document.getElementById('style-simple-bold').value}
+- أنيق (1) إلى عملي (100): ${document.getElementById('style-elegant-practical').value}`;
 
             const requestData = {
                 name: clientName,
@@ -268,27 +263,24 @@
             const originalText = submitBtn.textContent;
             submitBtn.textContent = 'جاري الإرسال...';
 
-            try {
-                // Google Apps Script requires text/plain with no-cors for cross-origin requests
-                await fetch('https://script.google.com/macros/s/AKfycbxY1Z51a0usTGCPnR8EzAk3cMAY_OuYCgUiFYUZFbWXCBicNhDkhwQEmPEqLqepAH7Bwg/exec', {
-                    method: 'POST',
-                    mode: 'no-cors',
-                    headers: { 'Content-Type': 'text/plain' },
-                    body: JSON.stringify(requestData)
-                });
-
-                // no-cors means we can't read the response; assume success if no exception
-                const successMessage = `شكراً لك ${clientName}!\nتم استلام البصمة الإبداعية لمشروعكم: ${projectName}.\nسيتواصل فريقنا معك عبر ${clientEmail} خلال 24 ساعة.`;
-                alert(successMessage);
-                window.location.href = 'index.html';
-            } catch (error) {
-                console.error('Submission error:', error);
-                alert(`حدث خطأ في الإرسال:\n${error.message}\n\nحاول مرة أخرى أو تواصل معنا مباشرة عبر البريد الإلكتروني.`);
-            } finally {
-                // Re-enable submit button
-                submitBtn.disabled = false;
-                submitBtn.textContent = originalText;
-            }
+            await window.TOKEN_SUBMIT(
+                requestData,
+                () => {
+                    // Success callback
+                    if (typeof window.showFormSuccess === 'function') {
+                        window.showFormSuccess('briefForm');
+                    } else {
+                        alert('تم استلام طلبك بنجاح! شكراً لك.');
+                        window.location.href = 'index.html';
+                    }
+                },
+                (err) => {
+                    // Error callback
+                    alert('عذراً، حدث خطأ أثناء الإرسال. يرجى المحاولة لاحقاً أو التواصل معنا مباشرة عبر الواتساب.');
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = originalText;
+                }
+            );
         }
     </script>
 

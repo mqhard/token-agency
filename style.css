@@ -129,6 +129,7 @@ p {
 .logo-text {
     background: linear-gradient(135deg, var(--primary-lime), var(--accent-cyan));
     -webkit-background-clip: text;
+    background-clip: text;
     -webkit-text-fill-color: transparent;
     font-size: 1.5rem;
     text-decoration: none;
@@ -782,6 +783,7 @@ footer p {
     margin: 0 auto 20px;
     background: linear-gradient(to right, var(--text-main), var(--text-muted));
     -webkit-background-clip: text;
+    background-clip: text;
     -webkit-text-fill-color: transparent;
 }
 
@@ -1175,6 +1177,7 @@ details.faq-item .faq-content {
     margin: 0 auto 30px;
     background: linear-gradient(to right, var(--text-main), var(--text-muted));
     -webkit-background-clip: text;
+    background-clip: text;
     -webkit-text-fill-color: transparent;
 }
 
@@ -1661,6 +1664,7 @@ html[dir="ltr"] .save-tag {
 
 .style-slider {
     -webkit-appearance: none;
+    appearance: none;
     width: 100%;
     height: 6px;
     background: rgba(255,255,255,0.1);
@@ -1670,6 +1674,7 @@ html[dir="ltr"] .save-tag {
 
 .style-slider::-webkit-slider-thumb {
     -webkit-appearance: none;
+    appearance: none;
     width: 20px;
     height: 20px;
     background: var(--primary-lime);
